@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PSY</string>
+    <string name="title_activity_main">Current PSI</string>
+
+    <string name="api_server_address">https://api.data.gov.sg/v1/</string>
+    <string name="api_key">Jo1YPLMsSq5D6WameuUAxvY6PNQTEG31</string>
+    <string name="name_api_key">api-key</string>
+
+    <string name="hint_network_failure">No connection detected. Please try again.</string>
+    <string name="hint_unknown_api_error">An error has occurred. Please try again later.</string>
+</resources>
