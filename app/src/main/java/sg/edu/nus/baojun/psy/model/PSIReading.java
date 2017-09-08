@@ -7,17 +7,24 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class PSIReading {
-    @SerializedName("west")
+    public static final String WEST = "west";
+    public static final String NATIONAL = "national";
+    public static final String EAST = "east";
+    public static final String CENTRAL = "central";
+    public static final String SOUTH = "south";
+    public static final String NORTH = "north";
+
+    @SerializedName(WEST)
     private double west;
-    @SerializedName("national")
+    @SerializedName(NATIONAL)
     private double national;
-    @SerializedName("east")
+    @SerializedName(EAST)
     private double east;
-    @SerializedName("central")
+    @SerializedName(CENTRAL)
     private double central;
-    @SerializedName("south")
+    @SerializedName(SOUTH)
     private double south;
-    @SerializedName("north")
+    @SerializedName(NORTH)
     private double north;
 
     public double getWest() {

@@ -48,7 +48,6 @@ public class GetPSIFromRemoteTest {
             @Override
             public void onResponse(Call<GetPSIResponse> call, Response<GetPSIResponse> response) {
 
-
                 if (response.isSuccessful()) {
                     GetPSIResponse psiResponse = response.body();
                     Assert.assertNotNull(psiResponse);
@@ -69,7 +68,6 @@ public class GetPSIFromRemoteTest {
         };
 
         call.enqueue(callback);
-
     }
 
     @Test
@@ -137,7 +135,6 @@ public class GetPSIFromRemoteTest {
         };
 
         call.enqueue(callback);
-
     }
 
     @Test
