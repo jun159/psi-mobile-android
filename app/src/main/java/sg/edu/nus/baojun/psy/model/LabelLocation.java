@@ -7,17 +7,17 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class LabelLocation {
-    @SerializedName("longtitude")
-    private double longtitude;
+    @SerializedName("longitude")
+    private double longitude;
     @SerializedName("latitude")
     private double latitude;
 
-    public double getLongtitude() {
-        return longtitude;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setLongtitude(double longtitude) {
-        this.longtitude = longtitude;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public double getLatitude() {
