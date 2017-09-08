@@ -14,12 +14,16 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import sg.edu.nus.baojun.psy.PsyApplication;
 import sg.edu.nus.baojun.psy.R;
+import sg.edu.nus.baojun.psy.model.RegionMetadata;
 import sg.edu.nus.baojun.psy.network.GetPSIResponse;
 
 public class MainActivity extends PsyActionBarActivity implements
@@ -94,6 +98,20 @@ public class MainActivity extends PsyActionBarActivity implements
 
                 if (response.isSuccessful()) {
                     Log.d("Load PSI Success", response.message());
+                    GetPSIResponse psiResponse = response.body();
+
+                    if(psiResponse != null && map != null) {
+                        List<RegionMetadata> regionMetadataList = psiResponse.getRegionMetadataList();
+                        for (RegionMetadata regionMetadata : regionMetadataList) {
+                            double latitude = regionMetadata.getLabelLocation().getLatitude();
+                            double longitude = regionMetadata.getLabelLocation().getLongitude();
+
+                            if(latitude != 0 && longitude != 0) {
+                                LatLng region = new LatLng(latitude, longitude);
+                                map.addMarker(new MarkerOptions().position(region).title(regionMetadata.getName()));
+                            }
+                        }
+                    }
                 } else {
                     handleAPICallFailure(response);
                 }
