@@ -28,9 +28,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import sg.edu.nus.baojun.psy.PsyApplication;
 import sg.edu.nus.baojun.psy.R;
+import sg.edu.nus.baojun.psy.model.PSIItem;
 import sg.edu.nus.baojun.psy.model.PSIReading;
 import sg.edu.nus.baojun.psy.model.RegionMetadata;
 import sg.edu.nus.baojun.psy.network.GetPSIResponse;
+import sg.edu.nus.baojun.psy.utils.FormatString;
 
 public class MainActivity extends PsyActionBarActivity implements
         OnMapReadyCallback,
@@ -73,6 +75,7 @@ public class MainActivity extends PsyActionBarActivity implements
 
     private GoogleMap map;
     private Marker marker;
+    private PSIItem psiItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,10 +198,18 @@ public class MainActivity extends PsyActionBarActivity implements
         textView.setTextColor(ContextCompat.getColor(this, R.color.black));
     }
 
+    private void setPsiReadingText(PSIReading psiReading) {
+        textPSIWest.setText(String.valueOf(psiReading.getWest()));
+        textPSINorth.setText(String.valueOf(psiReading.getNorth()));
+        textPSICentral.setText(String.valueOf(psiReading.getCentral()));
+        textPSISouth.setText(String.valueOf(psiReading.getSouth()));
+        textPSIEast.setText(String.valueOf(psiReading.getEast()));
+    }
+
     private void getCurrentPSILevel() {
         final PsyApplication application = getPsyApplication();
 
-        Call<GetPSIResponse> call = application.getPsyService().getPsiByDateTime("2016-12-12T09:45:00");
+        Call<GetPSIResponse> call = application.getPsyService().getPsiByDateTime(application.getDateTime());
 
         Callback<GetPSIResponse> callback = new Callback<GetPSIResponse>() {
             @Override
@@ -220,15 +231,13 @@ public class MainActivity extends PsyActionBarActivity implements
                             }
                         }
 
-                        PSIReading psiReading = psiResponse.getPsiItemList().get(0).getPsiReadings().getPsiTwentyFourHourly();
-                        textPSIWest.setText(String.valueOf(psiReading.getWest()));
-                        textPSINorth.setText(String.valueOf(psiReading.getNorth()));
-                        textPSICentral.setText(String.valueOf(psiReading.getCentral()));
-                        textPSISouth.setText(String.valueOf(psiReading.getSouth()));
-                        textPSIEast.setText(String.valueOf(psiReading.getEast()));
+                        psiItem = psiResponse.getPsiItemList().get(0);
+                        PSIReading psiReading = psiItem.getPsiReadings().getPsiTwentyFourHourly();
+                        setPsiReadingText(psiReading);
 
                         activityTitle.setText(String.format(getString(R.string.title_national_psi),
-                                String.valueOf(psiReading.getNational())));
+                                String.valueOf(psiReading.getNational()),
+                                FormatString.camelCase(psiResponse.getApiInfo().getStatus())));
                     }
                 } else {
                     handleAPICallFailure(response);

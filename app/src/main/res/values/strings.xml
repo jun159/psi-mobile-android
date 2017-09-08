@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">PSY</string>
     <string name="title_singapore_psi">Singapore PSI</string>
-    <string name="title_national_psi">National PSI: %1$s</string>
+    <string name="title_national_psi">National PSI: %1$s (%2$s)</string>
+    <string name="title_twenty_four_hours">24-hrs</string>
+    <string name="title_three_hours">3-hrs</string>
 
     <string name="api_server_address">https://api.data.gov.sg/v1/</string>
     <string name="api_key">Jo1YPLMsSq5D6WameuUAxvY6PNQTEG31</string>
