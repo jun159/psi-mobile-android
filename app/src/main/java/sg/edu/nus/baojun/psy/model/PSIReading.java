@@ -7,64 +7,64 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class PSIReading {
-    @SerializedName("national")
-    private int national;
-    @SerializedName("south")
-    private int south;
-    @SerializedName("north")
-    private int north;
-    @SerializedName("east")
-    private int east;
-    @SerializedName("central")
-    private int central;
     @SerializedName("west")
-    private int west;
+    private double west;
+    @SerializedName("national")
+    private double national;
+    @SerializedName("east")
+    private double east;
+    @SerializedName("central")
+    private double central;
+    @SerializedName("south")
+    private double south;
+    @SerializedName("north")
+    private double north;
 
-    public int getNational() {
-        return national;
-    }
-
-    public void setNational(int national) {
-        this.national = national;
-    }
-
-    public int getSouth() {
-        return south;
-    }
-
-    public void setSouth(int south) {
-        this.south = south;
-    }
-
-    public int getNorth() {
-        return north;
-    }
-
-    public void setNorth(int north) {
-        this.north = north;
-    }
-
-    public int getEast() {
-        return east;
-    }
-
-    public void setEast(int east) {
-        this.east = east;
-    }
-
-    public int getCentral() {
-        return central;
-    }
-
-    public void setCentral(int central) {
-        this.central = central;
-    }
-
-    public int getWest() {
+    public double getWest() {
         return west;
     }
 
-    public void setWest(int west) {
+    public void setWest(double west) {
         this.west = west;
+    }
+
+    public double getNational() {
+        return national;
+    }
+
+    public void setNational(double national) {
+        this.national = national;
+    }
+
+    public double getEast() {
+        return east;
+    }
+
+    public void setEast(double east) {
+        this.east = east;
+    }
+
+    public double getCentral() {
+        return central;
+    }
+
+    public void setCentral(double central) {
+        this.central = central;
+    }
+
+    public double getSouth() {
+        return south;
+    }
+
+    public void setSouth(double south) {
+        this.south = south;
+    }
+
+    public double getNorth() {
+        return north;
+    }
+
+    public void setNorth(double north) {
+        this.north = north;
     }
 }

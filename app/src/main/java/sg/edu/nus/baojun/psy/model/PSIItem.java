@@ -8,26 +8,26 @@ import com.google.gson.annotations.SerializedName;
 
 public class PSIItem {
     @SerializedName("timestamp")
-    private String timeStamp;
+    private String timestamp;
     @SerializedName("update_timestamp")
-    private String updateTimeStamp;
+    private String updateTimestamp;
     @SerializedName("readings")
     private PSIReadings psiReadings;
 
-    public String getTimeStamp() {
-        return timeStamp;
+    public String getTimestamp() {
+        return timestamp;
     }
 
-    public void setTimeStamp(String timestamp) {
-        this.timeStamp = timestamp;
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 
-    public String getUpdateTimeStamp() {
-        return updateTimeStamp;
+    public String getUpdateTimestamp() {
+        return updateTimestamp;
     }
 
-    public void setUpdateTimeStamp(String updateTimestamp) {
-        this.updateTimeStamp = updateTimestamp;
+    public void setUpdateTimestamp(String updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
     }
 
     public PSIReadings getPsiReadings() {

@@ -10,7 +10,7 @@ public class RegionMetadata {
     @SerializedName("name")
     private String name;
     @SerializedName("label_location")
-    private LabelLocation label_location;
+    private LabelLocation labelLocation;
 
     public String getName() {
         return name;
@@ -20,11 +20,11 @@ public class RegionMetadata {
         this.name = name;
     }
 
-    public LabelLocation getLabel_location() {
-        return label_location;
+    public LabelLocation getLabelLocation() {
+        return labelLocation;
     }
 
-    public void setLabel_location(LabelLocation label_location) {
-        this.label_location = label_location;
+    public void setLabelLocation(LabelLocation labelLocation) {
+        this.labelLocation = labelLocation;
     }
 }

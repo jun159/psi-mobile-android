@@ -3,13 +3,20 @@ package sg.edu.nus.baojun.psy;
 import android.app.Application;
 
 import java.io.IOException;
+import java.lang.annotation.Annotation;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import sg.edu.nus.baojun.psy.network.PsyService;
@@ -22,8 +29,26 @@ public class PsyApplication extends Application {
 
     private PsyService psyService;
 
+    private Converter<ResponseBody, String> errorConverter;
+
     public PsyService getPsyService() {
         return psyService;
+    }
+
+    public Converter<ResponseBody, String> getErrorConverter() {
+        return errorConverter;
+    }
+
+    public String getDate() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+        return simpleDateFormat.format(new Date());
+    }
+
+    public String getDateTime() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+        return simpleDateFormat.format(new Date());
     }
 
     @Override
@@ -59,5 +84,6 @@ public class PsyApplication extends Application {
                 .build();
 
         psyService = retrofit.create(PsyService.class);
+        errorConverter = retrofit.responseBodyConverter(String.class, new Annotation[0]);
     }
 }
