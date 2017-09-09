@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -53,44 +54,27 @@ public class MainActivity extends PsyActionBarActivity implements
     private static final double SINGAPORE_EAST_LATITUDE = 104.094500;
     private static final float ZOOM = 10.3F;
 
-    @BindView(R.id.text_last_updated)
-    TextView textLastUpdated;
+    @BindView(R.id.mainSwipeLayout) SwipeRefreshLayout mainSwipeLayout;
+    @BindView(R.id.text_last_updated) TextView textLastUpdated;
+    @BindView(R.id.activityTitle) TextView activityTitle;
 
-    @BindView(R.id.layout_psi_west)
-    LinearLayout layoutPSIWest;
-    @BindView(R.id.layout_psi_north)
-    LinearLayout layoutPSINorth;
-    @BindView(R.id.layout_psi_central)
-    LinearLayout layoutPSICentral;
-    @BindView(R.id.layout_psi_south)
-    LinearLayout layoutPSISouth;
-    @BindView(R.id.layout_psi_east)
-    LinearLayout layoutPSIEast;
+    @BindView(R.id.layout_psi_west) LinearLayout layoutPSIWest;
+    @BindView(R.id.layout_psi_north) LinearLayout layoutPSINorth;
+    @BindView(R.id.layout_psi_central) LinearLayout layoutPSICentral;
+    @BindView(R.id.layout_psi_south) LinearLayout layoutPSISouth;
+    @BindView(R.id.layout_psi_east) LinearLayout layoutPSIEast;
 
-    @BindView(R.id.label_psi_west)
-    TextView labelPSIWest;
-    @BindView(R.id.label_psi_north)
-    TextView labelPSINorth;
-    @BindView(R.id.label_psi_central)
-    TextView labelPSICentral;
-    @BindView(R.id.label_psi_south)
-    TextView labelPSISouth;
-    @BindView(R.id.label_psi_east)
-    TextView labelPSIEast;
+    @BindView(R.id.label_psi_west) TextView labelPSIWest;
+    @BindView(R.id.label_psi_north) TextView labelPSINorth;
+    @BindView(R.id.label_psi_central) TextView labelPSICentral;
+    @BindView(R.id.label_psi_south) TextView labelPSISouth;
+    @BindView(R.id.label_psi_east) TextView labelPSIEast;
 
-    @BindView(R.id.text_psi_west)
-    TextView textPSIWest;
-    @BindView(R.id.text_psi_north)
-    TextView textPSINorth;
-    @BindView(R.id.text_psi_central)
-    TextView textPSICentral;
-    @BindView(R.id.text_psi_south)
-    TextView textPSISouth;
-    @BindView(R.id.text_psi_east)
-    TextView textPSIEast;
-
-    @BindView(R.id.activityTitle)
-    TextView activityTitle;
+    @BindView(R.id.text_psi_west) TextView textPSIWest;
+    @BindView(R.id.text_psi_north) TextView textPSINorth;
+    @BindView(R.id.text_psi_central) TextView textPSICentral;
+    @BindView(R.id.text_psi_south) TextView textPSISouth;
+    @BindView(R.id.text_psi_east) TextView textPSIEast;
 
     private GoogleMap map;
     private Marker marker;
@@ -113,6 +97,16 @@ public class MainActivity extends PsyActionBarActivity implements
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        mainSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if(map != null) {
+                    getCurrentPSILevel();
+                    mainSwipeLayout.setRefreshing(true);
+                }
+            }
+        });
     }
 
     @Override
@@ -175,6 +169,8 @@ public class MainActivity extends PsyActionBarActivity implements
         Callback<GetPSIResponse> callback = new Callback<GetPSIResponse>() {
             @Override
             public void onResponse(Call<GetPSIResponse> call, Response<GetPSIResponse> response) {
+                mainSwipeLayout.setRefreshing(false);
+                textLastUpdated.setVisibility(View.VISIBLE);
 
                 if (response.isSuccessful()) {
                     Log.d("Load PSI Success", response.message());
@@ -202,19 +198,26 @@ public class MainActivity extends PsyActionBarActivity implements
 
                         textLastUpdated.setText(application.getCurrentTime());
                     } else {
-                        textLastUpdated.setVisibility(View.GONE);
                         handleAPICallFailure(response);
+                        if(textLastUpdated.getText().toString().isEmpty()) {
+                            textLastUpdated.setVisibility(View.GONE);
+                        }
                     }
                 } else {
-                    textLastUpdated.setVisibility(View.GONE);
                     handleAPICallFailure(response);
+                    if(textLastUpdated.getText().toString().isEmpty()) {
+                        textLastUpdated.setVisibility(View.GONE);
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<GetPSIResponse> call, Throwable t) {
-                textLastUpdated.setVisibility(View.GONE);
+                mainSwipeLayout.setRefreshing(false);
                 handleNetworkFailure();
+                if(textLastUpdated.getText().toString().isEmpty()) {
+                    textLastUpdated.setVisibility(View.GONE);
+                }
             }
         };
 
@@ -286,9 +289,7 @@ public class MainActivity extends PsyActionBarActivity implements
 
     @Override
     public void onClick(View view) {
-        if(psiItem == null) {
-            handleNetworkFailure();
-        } else {
+        if(psiItem != null) {
             String region = "";
             String o3SubIndex = "";
             String pm10TwentyFourHourly = "";

@@ -1,7 +1,6 @@
 package sg.edu.nus.baojun.psy.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
@@ -23,7 +22,7 @@ import sg.edu.nus.baojun.psy.utils.FormatString;
  * Created by BAOJUN on 9/9/17.
  */
 
-public class RegionPSIActivity extends PsyActionBarActivity {
+public class RegionPSIActivity extends PsyActionBarActivity implements View.OnClickListener {
 
     public static final String KEY_REGION = "KEY_REGION";
     public static final String KEY_REGION_PSI = "KEY_REGION_PSI";
@@ -35,6 +34,7 @@ public class RegionPSIActivity extends PsyActionBarActivity {
     @BindView(R.id.activityTitle) TextView activityTitle;
     @BindView(R.id.text_psi_region) TextView textPSIRegion;
     @BindView(R.id.text_psi_status) TextView textPSIStatus;
+    @BindView(R.id.button_toggle) TextView buttonToggle;
 
     @BindView(R.id.icon_status) TextView iconStatus;
 
@@ -59,6 +59,7 @@ public class RegionPSIActivity extends PsyActionBarActivity {
     @BindView(R.id.text_so2_after) TextView textSo2After;
     @BindView(R.id.text_no2_after) TextView textNo2After;
 
+    private PSIRegionReadings regionReadings;
     private boolean isSubIndex;
 
     @Override
@@ -73,7 +74,7 @@ public class RegionPSIActivity extends PsyActionBarActivity {
 
         ButterKnife.bind(this);
 
-        final PSIRegionReadings regionReadings = getIntent().getExtras().getParcelable(KEY_REGION_PSI);
+        regionReadings = getIntent().getExtras().getParcelable(KEY_REGION_PSI);
         String region = getIntent().getExtras().getString(KEY_REGION);
 
         if(region != null && regionReadings != null) {
@@ -87,20 +88,57 @@ public class RegionPSIActivity extends PsyActionBarActivity {
             activityTitle.setText(getString(R.string.title_singapore_psi));
         }
 
+        buttonToggle.setOnClickListener(this);
+        buttonToggle.setText(getString(R.string.button_toggle_see_more));
         isSubIndex = true;
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.button_toggle : {
                 if(isSubIndex) {
+                    buttonToggle.setText(getString(R.string.button_toggle_sub_index));
                     isSubIndex = false;
                     setPSIValuesHours(regionReadings);
                 } else {
+                    buttonToggle.setText(getString(R.string.button_toggle_see_more));
                     isSubIndex = true;
                     setPSIValuesSubIndex(regionReadings);
                 }
+
+                break;
             }
-        });
+
+            default: {
+                break;
+            }
+        }
+    }
+
+    private int getHealthStatusDrawable(double psiLevel) {
+        if(psiLevel <= PSIStatus.MODERATE_MAX.getValue()) {
+            return R.drawable.ic_thumb_up_white_24dp;
+        }
+
+        return R.drawable.ic_thumb_down_white_24dp;
+    }
+
+    private String determinePSIStatus(double psiLevel) {
+        if(psiLevel <= PSIStatus.HEALTHY_MAX.getValue()) {
+            return getString(R.string.status_healthy);
+        } else if(psiLevel >= PSIStatus.MODERATE_MIN.getValue()
+                && psiLevel <= PSIStatus.MODERATE_MAX.getValue()) {
+            return getString(R.string.status_moderate);
+        } else if(psiLevel >= PSIStatus.UNHEALTHY_MIN.getValue()
+                && psiLevel <= PSIStatus.UNHEALTHY_MAX.getValue()) {
+            return getString(R.string.status_unhealthy);
+        } else if(psiLevel >= PSIStatus.VERY_UNHEALTHY_MIN.getValue()
+                && psiLevel <= PSIStatus.VERY_UNHEALTHY_MAX.getValue()) {
+            return getString(R.string.status_very_unhealthy);
+        }
+
+        return getString(R.string.status_hazardous);
     }
 
     private SpannableStringBuilder superSubScript(String chemical, int subscriptType) {
@@ -189,30 +227,5 @@ public class RegionPSIActivity extends PsyActionBarActivity {
         psiLevelAfter.setLayoutParams(params);
 
         psiLevelAfter.setText("▲");
-    }
-
-    private int getHealthStatusDrawable(double psiLevel) {
-        if(psiLevel <= PSIStatus.MODERATE_MAX.getValue()) {
-            return R.drawable.ic_thumb_up_white_24dp;
-        }
-
-        return R.drawable.ic_thumb_down_white_24dp;
-    }
-
-    private String determinePSIStatus(double psiLevel) {
-        if(psiLevel <= PSIStatus.HEALTHY_MAX.getValue()) {
-            return getString(R.string.status_healthy);
-        } else if(psiLevel >= PSIStatus.MODERATE_MIN.getValue()
-                && psiLevel <= PSIStatus.MODERATE_MAX.getValue()) {
-            return getString(R.string.status_moderate);
-        } else if(psiLevel >= PSIStatus.UNHEALTHY_MIN.getValue()
-                && psiLevel <= PSIStatus.UNHEALTHY_MAX.getValue()) {
-            return getString(R.string.status_unhealthy);
-        } else if(psiLevel >= PSIStatus.VERY_UNHEALTHY_MIN.getValue()
-                && psiLevel <= PSIStatus.VERY_UNHEALTHY_MAX.getValue()) {
-            return getString(R.string.status_very_unhealthy);
-        }
-
-        return getString(R.string.status_hazardous);
     }
 }

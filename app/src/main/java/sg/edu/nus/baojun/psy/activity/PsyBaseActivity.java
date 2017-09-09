@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.view.WindowManager;
 
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
@@ -27,26 +25,6 @@ public class PsyBaseActivity extends AppCompatActivity {
         return (PsyApplication) getApplication();
     }
 
-    public void startLoading() {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-        if (loadingView == null) {
-            loadingView = (CircleProgressBar) findViewById(R.id.loadingView);
-        }
-        if (loadingView != null) {
-            loadingView.setVisibility(View.VISIBLE);
-        }
-    }
-
-    public void stopLoading() {
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-        if (loadingView == null) {
-            loadingView = (CircleProgressBar) findViewById(R.id.loadingView);
-        }
-        if (loadingView != null) {
-            loadingView.setVisibility(View.GONE);
-        }
-    }
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +38,6 @@ public class PsyBaseActivity extends AppCompatActivity {
     }
 
     public void handleAPICallFailure(Response<? extends Object> response) {
-        stopLoading();
         if (response.errorBody() != null) {
             try {
                 String error = getPsyApplication().getErrorConverter().convert(response.errorBody());
@@ -80,6 +57,5 @@ public class PsyBaseActivity extends AppCompatActivity {
     public void handleNetworkFailure() {
         Snackbar snackbar = Snackbar.make(loadingView, R.string.hint_network_failure, Snackbar.LENGTH_SHORT);
         snackbar.show();
-        stopLoading();
     }
 }

@@ -11,6 +11,8 @@
     <string name="name_api_key">api-key</string>
 
     <string name="last_updated">Last Updated at: %1$s</string>
+    <string name="button_toggle_sub_index">Tap To See Sub Index</string>
+    <string name="button_toggle_see_more">Tap To See More</string>
 
     <string name="north">North</string>
     <string name="south">South</string>

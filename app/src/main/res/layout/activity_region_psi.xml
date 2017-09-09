@@ -32,12 +32,14 @@
 
     <include layout="@layout/content_region_psi" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_refresh_white_24dp" />
+    <TextView
+        android:id="@+id/button_toggle"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:background="@color/colorPrimary"/>
 
 </android.support.design.widget.CoordinatorLayout>
