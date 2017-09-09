@@ -53,6 +53,9 @@ public class MainActivity extends PsyActionBarActivity implements
     private static final double SINGAPORE_EAST_LATITUDE = 104.094500;
     private static final float ZOOM = 10.3F;
 
+    @BindView(R.id.text_last_updated)
+    TextView textLastUpdated;
+
     @BindView(R.id.layout_psi_west)
     LinearLayout layoutPSIWest;
     @BindView(R.id.layout_psi_north)
@@ -196,14 +199,21 @@ public class MainActivity extends PsyActionBarActivity implements
                         activityTitle.setText(String.format(getString(R.string.title_national_psi),
                                 String.valueOf(psiReading.getNational()),
                                 FormatString.camelCase(psiResponse.getApiInfo().getStatus())));
+
+                        textLastUpdated.setText(application.getCurrentTime());
+                    } else {
+                        textLastUpdated.setVisibility(View.GONE);
+                        handleAPICallFailure(response);
                     }
                 } else {
+                    textLastUpdated.setVisibility(View.GONE);
                     handleAPICallFailure(response);
                 }
             }
 
             @Override
             public void onFailure(Call<GetPSIResponse> call, Throwable t) {
+                textLastUpdated.setVisibility(View.GONE);
                 handleNetworkFailure();
             }
         };
@@ -276,120 +286,124 @@ public class MainActivity extends PsyActionBarActivity implements
 
     @Override
     public void onClick(View view) {
-        String region = "";
-        String o3SubIndex = "";
-        String pm10TwentyFourHourly = "";
-        String pm10SubIndex = "";
-        String coSubIndex = "";
-        String pm25TwentyFourHourly = "";
-        String so2SubIndex = "";
-        String coEightHourMax = "";
-        String no2OneHourMax = "";
-        String so2TwentyFourHourly = "";
-        String pm25SubIndex = "";
-        String psiTwentyFourHourly = "";
-        String o3EightHourMax = "";
+        if(psiItem == null) {
+            handleNetworkFailure();
+        } else {
+            String region = "";
+            String o3SubIndex = "";
+            String pm10TwentyFourHourly = "";
+            String pm10SubIndex = "";
+            String coSubIndex = "";
+            String pm25TwentyFourHourly = "";
+            String so2SubIndex = "";
+            String coEightHourMax = "";
+            String no2OneHourMax = "";
+            String so2TwentyFourHourly = "";
+            String pm25SubIndex = "";
+            String psiTwentyFourHourly = "";
+            String o3EightHourMax = "";
 
-        switch (view.getId()) {
-            case R.id.layout_psi_west : {
-                region = PSIReading.WEST;
-                o3SubIndex = String.valueOf(psiItem.getPsiReadings().getO3SubIndex().getWest());
-                pm10TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm10TwentyFourHourly().getWest());
-                pm10SubIndex = String.valueOf(psiItem.getPsiReadings().getPm10SubIndex().getWest());
-                coSubIndex = String.valueOf(psiItem.getPsiReadings().getCoSubIndex().getWest());
-                pm25TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm25TwentyFourHourly().getWest());
-                so2SubIndex = String.valueOf(psiItem.getPsiReadings().getSo2SubIndex().getWest());
-                coEightHourMax = String.valueOf(psiItem.getPsiReadings().getCoEightHourMax().getWest());
-                no2OneHourMax = String.valueOf(psiItem.getPsiReadings().getNo2OneHourMax().getWest());
-                so2TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getSo2TwentyFourHourly().getWest());
-                pm25SubIndex = String.valueOf(psiItem.getPsiReadings().getPm25SubIndex().getWest());
-                psiTwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPsiTwentyFourHourly().getWest());
-                o3EightHourMax = String.valueOf(psiItem.getPsiReadings().getO3EightHourMax().getWest());
-                break;
+            switch (view.getId()) {
+                case R.id.layout_psi_west: {
+                    region = PSIReading.WEST;
+                    o3SubIndex = String.valueOf(psiItem.getPsiReadings().getO3SubIndex().getWest());
+                    pm10TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm10TwentyFourHourly().getWest());
+                    pm10SubIndex = String.valueOf(psiItem.getPsiReadings().getPm10SubIndex().getWest());
+                    coSubIndex = String.valueOf(psiItem.getPsiReadings().getCoSubIndex().getWest());
+                    pm25TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm25TwentyFourHourly().getWest());
+                    so2SubIndex = String.valueOf(psiItem.getPsiReadings().getSo2SubIndex().getWest());
+                    coEightHourMax = String.valueOf(psiItem.getPsiReadings().getCoEightHourMax().getWest());
+                    no2OneHourMax = String.valueOf(psiItem.getPsiReadings().getNo2OneHourMax().getWest());
+                    so2TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getSo2TwentyFourHourly().getWest());
+                    pm25SubIndex = String.valueOf(psiItem.getPsiReadings().getPm25SubIndex().getWest());
+                    psiTwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPsiTwentyFourHourly().getWest());
+                    o3EightHourMax = String.valueOf(psiItem.getPsiReadings().getO3EightHourMax().getWest());
+                    break;
+                }
+
+                case R.id.layout_psi_north: {
+                    region = PSIReading.NORTH;
+                    o3SubIndex = String.valueOf(psiItem.getPsiReadings().getO3SubIndex().getNorth());
+                    pm10TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm10TwentyFourHourly().getNorth());
+                    pm10SubIndex = String.valueOf(psiItem.getPsiReadings().getPm10SubIndex().getNorth());
+                    coSubIndex = String.valueOf(psiItem.getPsiReadings().getCoSubIndex().getNorth());
+                    pm25TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm25TwentyFourHourly().getNorth());
+                    so2SubIndex = String.valueOf(psiItem.getPsiReadings().getSo2SubIndex().getNorth());
+                    coEightHourMax = String.valueOf(psiItem.getPsiReadings().getCoEightHourMax().getNorth());
+                    no2OneHourMax = String.valueOf(psiItem.getPsiReadings().getNo2OneHourMax().getNorth());
+                    so2TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getSo2TwentyFourHourly().getNorth());
+                    pm25SubIndex = String.valueOf(psiItem.getPsiReadings().getPm25SubIndex().getNorth());
+                    psiTwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPsiTwentyFourHourly().getNorth());
+                    o3EightHourMax = String.valueOf(psiItem.getPsiReadings().getO3EightHourMax().getNorth());
+                    break;
+                }
+
+                case R.id.layout_psi_central: {
+                    region = PSIReading.CENTRAL;
+                    o3SubIndex = String.valueOf(psiItem.getPsiReadings().getO3SubIndex().getCentral());
+                    pm10TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm10TwentyFourHourly().getCentral());
+                    pm10SubIndex = String.valueOf(psiItem.getPsiReadings().getPm10SubIndex().getCentral());
+                    coSubIndex = String.valueOf(psiItem.getPsiReadings().getCoSubIndex().getCentral());
+                    pm25TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm25TwentyFourHourly().getCentral());
+                    so2SubIndex = String.valueOf(psiItem.getPsiReadings().getSo2SubIndex().getCentral());
+                    coEightHourMax = String.valueOf(psiItem.getPsiReadings().getCoEightHourMax().getCentral());
+                    no2OneHourMax = String.valueOf(psiItem.getPsiReadings().getNo2OneHourMax().getCentral());
+                    so2TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getSo2TwentyFourHourly().getCentral());
+                    pm25SubIndex = String.valueOf(psiItem.getPsiReadings().getPm25SubIndex().getCentral());
+                    psiTwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPsiTwentyFourHourly().getCentral());
+                    o3EightHourMax = String.valueOf(psiItem.getPsiReadings().getO3EightHourMax().getCentral());
+                    break;
+                }
+
+                case R.id.layout_psi_south: {
+                    region = PSIReading.SOUTH;
+                    o3SubIndex = String.valueOf(psiItem.getPsiReadings().getO3SubIndex().getSouth());
+                    pm10TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm10TwentyFourHourly().getSouth());
+                    pm10SubIndex = String.valueOf(psiItem.getPsiReadings().getPm10SubIndex().getSouth());
+                    coSubIndex = String.valueOf(psiItem.getPsiReadings().getCoSubIndex().getSouth());
+                    pm25TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm25TwentyFourHourly().getSouth());
+                    so2SubIndex = String.valueOf(psiItem.getPsiReadings().getSo2SubIndex().getSouth());
+                    coEightHourMax = String.valueOf(psiItem.getPsiReadings().getCoEightHourMax().getSouth());
+                    no2OneHourMax = String.valueOf(psiItem.getPsiReadings().getNo2OneHourMax().getSouth());
+                    so2TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getSo2TwentyFourHourly().getSouth());
+                    pm25SubIndex = String.valueOf(psiItem.getPsiReadings().getPm25SubIndex().getSouth());
+                    psiTwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPsiTwentyFourHourly().getSouth());
+                    o3EightHourMax = String.valueOf(psiItem.getPsiReadings().getO3EightHourMax().getSouth());
+                    break;
+                }
+
+                case R.id.layout_psi_east: {
+                    region = PSIReading.EAST;
+                    o3SubIndex = String.valueOf(psiItem.getPsiReadings().getO3SubIndex().getEast());
+                    pm10TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm10TwentyFourHourly().getEast());
+                    pm10SubIndex = String.valueOf(psiItem.getPsiReadings().getPm10SubIndex().getEast());
+                    coSubIndex = String.valueOf(psiItem.getPsiReadings().getCoSubIndex().getEast());
+                    pm25TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm25TwentyFourHourly().getEast());
+                    so2SubIndex = String.valueOf(psiItem.getPsiReadings().getSo2SubIndex().getEast());
+                    coEightHourMax = String.valueOf(psiItem.getPsiReadings().getCoEightHourMax().getEast());
+                    no2OneHourMax = String.valueOf(psiItem.getPsiReadings().getNo2OneHourMax().getEast());
+                    so2TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getSo2TwentyFourHourly().getEast());
+                    pm25SubIndex = String.valueOf(psiItem.getPsiReadings().getPm25SubIndex().getEast());
+                    psiTwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPsiTwentyFourHourly().getEast());
+                    o3EightHourMax = String.valueOf(psiItem.getPsiReadings().getO3EightHourMax().getEast());
+                    break;
+                }
+
+                default: {
+                    break;
+                }
             }
 
-            case R.id.layout_psi_north : {
-                region = PSIReading.NORTH;
-                o3SubIndex = String.valueOf(psiItem.getPsiReadings().getO3SubIndex().getNorth());
-                pm10TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm10TwentyFourHourly().getNorth());
-                pm10SubIndex = String.valueOf(psiItem.getPsiReadings().getPm10SubIndex().getNorth());
-                coSubIndex = String.valueOf(psiItem.getPsiReadings().getCoSubIndex().getNorth());
-                pm25TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm25TwentyFourHourly().getNorth());
-                so2SubIndex = String.valueOf(psiItem.getPsiReadings().getSo2SubIndex().getNorth());
-                coEightHourMax = String.valueOf(psiItem.getPsiReadings().getCoEightHourMax().getNorth());
-                no2OneHourMax = String.valueOf(psiItem.getPsiReadings().getNo2OneHourMax().getNorth());
-                so2TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getSo2TwentyFourHourly().getNorth());
-                pm25SubIndex = String.valueOf(psiItem.getPsiReadings().getPm25SubIndex().getNorth());
-                psiTwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPsiTwentyFourHourly().getNorth());
-                o3EightHourMax = String.valueOf(psiItem.getPsiReadings().getO3EightHourMax().getNorth());
-                break;
-            }
+            PSIRegionReadings regionReadings = new PSIRegionReadings(
+                    o3SubIndex, pm10TwentyFourHourly, pm10SubIndex,
+                    coSubIndex, pm25TwentyFourHourly, so2SubIndex,
+                    coEightHourMax, no2OneHourMax, so2TwentyFourHourly,
+                    pm25SubIndex, psiTwentyFourHourly, o3EightHourMax);
 
-            case R.id.layout_psi_central : {
-                region = PSIReading.CENTRAL;
-                o3SubIndex = String.valueOf(psiItem.getPsiReadings().getO3SubIndex().getCentral());
-                pm10TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm10TwentyFourHourly().getCentral());
-                pm10SubIndex = String.valueOf(psiItem.getPsiReadings().getPm10SubIndex().getCentral());
-                coSubIndex = String.valueOf(psiItem.getPsiReadings().getCoSubIndex().getCentral());
-                pm25TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm25TwentyFourHourly().getCentral());
-                so2SubIndex = String.valueOf(psiItem.getPsiReadings().getSo2SubIndex().getCentral());
-                coEightHourMax = String.valueOf(psiItem.getPsiReadings().getCoEightHourMax().getCentral());
-                no2OneHourMax = String.valueOf(psiItem.getPsiReadings().getNo2OneHourMax().getCentral());
-                so2TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getSo2TwentyFourHourly().getCentral());
-                pm25SubIndex = String.valueOf(psiItem.getPsiReadings().getPm25SubIndex().getCentral());
-                psiTwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPsiTwentyFourHourly().getCentral());
-                o3EightHourMax = String.valueOf(psiItem.getPsiReadings().getO3EightHourMax().getCentral());
-                break;
-            }
-
-            case R.id.layout_psi_south : {
-                region = PSIReading.SOUTH;
-                o3SubIndex = String.valueOf(psiItem.getPsiReadings().getO3SubIndex().getSouth());
-                pm10TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm10TwentyFourHourly().getSouth());
-                pm10SubIndex = String.valueOf(psiItem.getPsiReadings().getPm10SubIndex().getSouth());
-                coSubIndex = String.valueOf(psiItem.getPsiReadings().getCoSubIndex().getSouth());
-                pm25TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm25TwentyFourHourly().getSouth());
-                so2SubIndex = String.valueOf(psiItem.getPsiReadings().getSo2SubIndex().getSouth());
-                coEightHourMax = String.valueOf(psiItem.getPsiReadings().getCoEightHourMax().getSouth());
-                no2OneHourMax = String.valueOf(psiItem.getPsiReadings().getNo2OneHourMax().getSouth());
-                so2TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getSo2TwentyFourHourly().getSouth());
-                pm25SubIndex = String.valueOf(psiItem.getPsiReadings().getPm25SubIndex().getSouth());
-                psiTwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPsiTwentyFourHourly().getSouth());
-                o3EightHourMax = String.valueOf(psiItem.getPsiReadings().getO3EightHourMax().getSouth());
-                break;
-            }
-
-            case R.id.layout_psi_east : {
-                region = PSIReading.EAST;
-                o3SubIndex = String.valueOf(psiItem.getPsiReadings().getO3SubIndex().getEast());
-                pm10TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm10TwentyFourHourly().getEast());
-                pm10SubIndex = String.valueOf(psiItem.getPsiReadings().getPm10SubIndex().getEast());
-                coSubIndex = String.valueOf(psiItem.getPsiReadings().getCoSubIndex().getEast());
-                pm25TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm25TwentyFourHourly().getEast());
-                so2SubIndex = String.valueOf(psiItem.getPsiReadings().getSo2SubIndex().getEast());
-                coEightHourMax = String.valueOf(psiItem.getPsiReadings().getCoEightHourMax().getEast());
-                no2OneHourMax = String.valueOf(psiItem.getPsiReadings().getNo2OneHourMax().getEast());
-                so2TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getSo2TwentyFourHourly().getEast());
-                pm25SubIndex = String.valueOf(psiItem.getPsiReadings().getPm25SubIndex().getEast());
-                psiTwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPsiTwentyFourHourly().getEast());
-                o3EightHourMax = String.valueOf(psiItem.getPsiReadings().getO3EightHourMax().getEast());
-                break;
-            }
-
-            default: {
-                break;
-            }
+            Intent intent = new Intent(this, RegionPSIActivity.class);
+            intent.putExtra(RegionPSIActivity.KEY_REGION, region);
+            intent.putExtra(RegionPSIActivity.KEY_REGION_PSI, regionReadings);
+            startActivity(intent);
         }
-
-        PSIRegionReadings regionReadings = new PSIRegionReadings(
-                o3SubIndex, pm10TwentyFourHourly, pm10SubIndex,
-                coSubIndex, pm25TwentyFourHourly, so2SubIndex,
-                coEightHourMax, no2OneHourMax, so2TwentyFourHourly,
-                pm25SubIndex, psiTwentyFourHourly, o3EightHourMax);
-
-        Intent intent = new Intent(this, RegionPSIActivity.class);
-        intent.putExtra(RegionPSIActivity.KEY_REGION, region);
-        intent.putExtra(RegionPSIActivity.KEY_REGION_PSI, regionReadings);
-        startActivity(intent);
     }
 }

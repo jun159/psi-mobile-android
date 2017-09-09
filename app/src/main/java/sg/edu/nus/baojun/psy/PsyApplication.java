@@ -4,7 +4,9 @@ import android.app.Application;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -49,6 +51,15 @@ public class PsyApplication extends Application {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
         return simpleDateFormat.format(new Date());
+    }
+
+    public String getCurrentTime() {
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"));
+        Date currentLocalTime = calendar.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy KK:mm a");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+
+        return String.format(getString(R.string.last_updated), dateFormat.format(currentLocalTime));
     }
 
     @Override

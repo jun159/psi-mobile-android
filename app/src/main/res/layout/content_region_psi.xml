@@ -27,7 +27,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="180dp"
                     android:background="@color/colorPrimary"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -36,31 +36,17 @@
                         android:id="@+id/icon_status"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
+                        android:layout_marginBottom="10dp"
                         android:gravity="center" />
 
-                    <RelativeLayout
+                    <TextView
+                        android:id="@+id/text_psi_region"
                         android:layout_width="match_parent"
-                        android:layout_height="47dp"
-                        android:gravity="center">
-
-                        <ProgressBar
-                            android:id="@+id/progress_status"
-                            style="@android:style/Widget.ProgressBar.Horizontal"
-                            android:layout_width="150dp"
-                            android:layout_height="match_parent"
-                            android:padding="15dp"
-                            android:progressBackgroundTint="@color/progress"
-                            android:progressTint="@color/white" />
-
-                        <TextView
-                            android:id="@+id/text_psi_region"
-                            android:layout_width="150dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:textColor="@color/black"
-                            android:textSize="12sp" />
-
-                    </RelativeLayout>
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/text_psi_status"
@@ -93,7 +79,7 @@
                                 android:id="@+id/label_pm10"
                                 android:layout_width="0dp"
                                 android:layout_height="45dp"
-                                android:layout_weight="1.5"
+                                android:layout_weight="1.6"
                                 android:gravity="center_vertical"
                                 android:textColor="@color/black" />
 
@@ -120,19 +106,19 @@
                                     <TextView
                                         android:id="@+id/text_pm10_before"
                                         android:layout_width="0dp"
-                                        android:layout_weight="1.5"
+                                        android:layout_weight="1.6"
                                         android:layout_height="match_parent"
                                         android:paddingTop="28dp"
-                                        android:textColor="@color/black"
+                                        android:textColor="@color/darker_gray"
                                         android:textSize="10sp" />
 
                                     <TextView
                                         android:id="@+id/text_pm10_after"
                                         android:layout_width="0dp"
-                                        android:layout_weight="1.5"
+                                        android:layout_weight="1.6"
                                         android:layout_height="match_parent"
                                         android:paddingTop="28dp"
-                                        android:textColor="@color/black"
+                                        android:textColor="@color/darker_gray"
                                         android:textSize="10sp" />
 
                                 </LinearLayout>
@@ -159,7 +145,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="45dp"
                                 android:layout_alignParentLeft="true"
-                                android:layout_weight="1.5"
+                                android:layout_weight="1.6"
                                 android:gravity="center_vertical"
                                 android:textColor="@color/black" />
 
@@ -186,19 +172,19 @@
                                     <TextView
                                         android:id="@+id/text_pm25_before"
                                         android:layout_width="0dp"
-                                        android:layout_weight="1.5"
+                                        android:layout_weight="1.6"
                                         android:layout_height="match_parent"
                                         android:paddingTop="28dp"
-                                        android:textColor="@color/black"
+                                        android:textColor="@color/darker_gray"
                                         android:textSize="10sp" />
 
                                     <TextView
                                         android:id="@+id/text_pm25_after"
                                         android:layout_width="0dp"
-                                        android:layout_weight="1.5"
+                                        android:layout_weight="1.6"
                                         android:layout_height="match_parent"
                                         android:paddingTop="28dp"
-                                        android:textColor="@color/black"
+                                        android:textColor="@color/darker_gray"
                                         android:textSize="10sp" />
                                 </LinearLayout>
 
@@ -224,7 +210,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="45dp"
                                 android:layout_alignParentLeft="true"
-                                android:layout_weight="1.5"
+                                android:layout_weight="1.6"
                                 android:gravity="center_vertical"
                                 android:textColor="@color/black" />
 
@@ -252,19 +238,19 @@
                                     <TextView
                                         android:id="@+id/text_co_before"
                                         android:layout_width="0dp"
-                                        android:layout_weight="1.5"
+                                        android:layout_weight="1.6"
                                         android:layout_height="match_parent"
                                         android:paddingTop="28dp"
-                                        android:textColor="@color/black"
+                                        android:textColor="@color/darker_gray"
                                         android:textSize="10sp" />
 
                                     <TextView
                                         android:id="@+id/text_co_after"
                                         android:layout_width="0dp"
-                                        android:layout_weight="1.5"
+                                        android:layout_weight="1.6"
                                         android:layout_height="match_parent"
                                         android:paddingTop="28dp"
-                                        android:textColor="@color/black"
+                                        android:textColor="@color/darker_gray"
                                         android:textSize="10sp" />
 
                                 </LinearLayout>
@@ -290,7 +276,7 @@
                                 android:id="@+id/label_o3"
                                 android:layout_width="0dp"
                                 android:layout_height="45dp"
-                                android:layout_weight="1.5"
+                                android:layout_weight="1.6"
                                 android:gravity="center_vertical"
                                 android:textColor="@color/black" />
 
@@ -317,19 +303,19 @@
                                     <TextView
                                         android:id="@+id/text_o3_before"
                                         android:layout_width="0dp"
-                                        android:layout_weight="1.5"
+                                        android:layout_weight="1.6"
                                         android:layout_height="match_parent"
                                         android:paddingTop="28dp"
-                                        android:textColor="@color/black"
+                                        android:textColor="@color/darker_gray"
                                         android:textSize="10sp" />
 
                                     <TextView
                                         android:id="@+id/text_o3_after"
                                         android:layout_width="0dp"
-                                        android:layout_weight="1.5"
+                                        android:layout_weight="1.6"
                                         android:layout_height="match_parent"
                                         android:paddingTop="28dp"
-                                        android:textColor="@color/black"
+                                        android:textColor="@color/darker_gray"
                                         android:textSize="10sp" />
 
                                 </LinearLayout>
@@ -355,7 +341,7 @@
                                 android:id="@+id/label_so2"
                                 android:layout_width="0dp"
                                 android:layout_height="45dp"
-                                android:layout_weight="1.5"
+                                android:layout_weight="1.6"
                                 android:gravity="center_vertical"
                                 android:textColor="@color/black" />
 
@@ -382,19 +368,19 @@
                                     <TextView
                                         android:id="@+id/text_so2_before"
                                         android:layout_width="0dp"
-                                        android:layout_weight="1.5"
+                                        android:layout_weight="1.6"
                                         android:layout_height="match_parent"
                                         android:paddingTop="28dp"
-                                        android:textColor="@color/black"
+                                        android:textColor="@color/darker_gray"
                                         android:textSize="10sp" />
 
                                     <TextView
                                         android:id="@+id/text_so2_after"
                                         android:layout_width="0dp"
-                                        android:layout_weight="1.5"
+                                        android:layout_weight="1.6"
                                         android:layout_height="match_parent"
                                         android:paddingTop="28dp"
-                                        android:textColor="@color/black"
+                                        android:textColor="@color/darker_gray"
                                         android:textSize="10sp" />
 
                                 </LinearLayout>
@@ -420,7 +406,7 @@
                                 android:id="@+id/label_no2"
                                 android:layout_width="0dp"
                                 android:layout_height="45dp"
-                                android:layout_weight="1.5"
+                                android:layout_weight="1.6"
                                 android:gravity="center_vertical"
                                 android:textColor="@color/black" />
 
@@ -447,19 +433,19 @@
                                     <TextView
                                         android:id="@+id/text_no2_before"
                                         android:layout_width="0dp"
-                                        android:layout_weight="1.5"
+                                        android:layout_weight="1.6"
                                         android:layout_height="match_parent"
                                         android:paddingTop="28dp"
-                                        android:textColor="@color/black"
+                                        android:textColor="@color/darker_gray"
                                         android:textSize="10sp" />
 
                                     <TextView
                                         android:id="@+id/text_no2_after"
                                         android:layout_width="0dp"
-                                        android:layout_weight="1.5"
+                                        android:layout_weight="1.6"
                                         android:layout_height="match_parent"
                                         android:paddingTop="28dp"
-                                        android:textColor="@color/black"
+                                        android:textColor="@color/darker_gray"
                                         android:textSize="10sp" />
 
                                 </LinearLayout>
@@ -490,7 +476,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:padding="20dp"
-        android:textColor="@color/black"
+        android:textColor="@color/darker_gray"
         android:textSize="15sp"
         android:visibility="gone" />
 

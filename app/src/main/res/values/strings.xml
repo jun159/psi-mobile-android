@@ -10,25 +10,27 @@
     <string name="api_key">Jo1YPLMsSq5D6WameuUAxvY6PNQTEG31</string>
     <string name="name_api_key">api-key</string>
 
+    <string name="last_updated">Last Updated at: %1$s</string>
+
     <string name="north">North</string>
     <string name="south">South</string>
     <string name="central">Central</string>
     <string name="east">East</string>
     <string name="west">West</string>
-    <string name="empty">--</string>
+    <string name="empty">---</string>
 
     <string name="o3_sub_index">O3 Sub Index</string>
-    <string name="pm10_twenty_four_hourly">PM10 Twenty Four Hourly</string>
+    <string name="pm10_twenty_four_hourly">PM10 24-Hourly</string>
     <string name="pm10_sub_index">PM10 Sub Index</string>
     <string name="co_sub_index">CO Sub Index</string>
-    <string name="pm25_twenty_four_hourly">PM25 Twenty Four Hourly</string>
+    <string name="pm25_twenty_four_hourly">PM25 24-Hourly</string>
     <string name="so2_sub_index">SO2 Sub Index</string>
-    <string name="co_eight_hour_max">CO Eight Hour Max</string>
+    <string name="co_eight_hour_max">CO 8-Hours Max</string>
     <string name="no2_sub_index">NO2 Sub Index</string>
-    <string name="no2_one_hour_max">NO2 One Hour Max</string>
-    <string name="so2_twenty_four_hourly">SO2 Twenty Four Hourly</string>
+    <string name="no2_one_hour_max">NO2 1-Hour Max</string>
+    <string name="so2_twenty_four_hourly">SO2 24-Hourly</string>
     <string name="pm25_sub_index">PM25 Sub Index</string>
-    <string name="o3_eight_hour_max">O3 Eight Hour Max</string>
+    <string name="o3_eight_hour_max">O3 8-Hours Max</string>
 
     <string name="region_psi">%1$s PSI: %2$s</string>
     <string name="region_psi_status">Status: %1$s</string>
