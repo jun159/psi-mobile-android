@@ -98,6 +98,7 @@ public class MainActivity extends PsyActionBarActivity implements
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        textLastUpdated.setVisibility(View.GONE);
         mainSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -196,17 +197,22 @@ public class MainActivity extends PsyActionBarActivity implements
                                 String.valueOf(psiReading.getNational()),
                                 FormatString.camelCase(psiResponse.getApiInfo().getStatus())));
 
+                        textLastUpdated.setVisibility(View.VISIBLE);
                         textLastUpdated.setText(application.getCurrentTime());
                     } else {
                         handleAPICallFailure(response);
                         if(textLastUpdated.getText().toString().isEmpty()) {
                             textLastUpdated.setVisibility(View.GONE);
+                        } else {
+                            textLastUpdated.setVisibility(View.VISIBLE);
                         }
                     }
                 } else {
                     handleAPICallFailure(response);
                     if(textLastUpdated.getText().toString().isEmpty()) {
                         textLastUpdated.setVisibility(View.GONE);
+                    } else {
+                        textLastUpdated.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -217,6 +223,8 @@ public class MainActivity extends PsyActionBarActivity implements
                 handleNetworkFailure();
                 if(textLastUpdated.getText().toString().isEmpty()) {
                     textLastUpdated.setVisibility(View.GONE);
+                } else {
+                    textLastUpdated.setVisibility(View.VISIBLE);
                 }
             }
         };
@@ -289,7 +297,7 @@ public class MainActivity extends PsyActionBarActivity implements
 
     @Override
     public void onClick(View view) {
-        if(psiItem != null) {
+        if(map != null && psiItem != null) {
             String region = "";
             String o3SubIndex = "";
             String pm10TwentyFourHourly = "";

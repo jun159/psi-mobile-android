@@ -5,7 +5,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 /**
- * Created by BAOJUN on 9/7/17.
+ * API call services for retrieving PSI data
  */
 
 public interface PsyService {

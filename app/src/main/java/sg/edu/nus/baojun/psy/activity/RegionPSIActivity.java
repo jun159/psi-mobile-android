@@ -35,8 +35,10 @@ public class RegionPSIActivity extends PsyActionBarActivity implements View.OnCl
     @BindView(R.id.text_psi_region) TextView textPSIRegion;
     @BindView(R.id.text_psi_status) TextView textPSIStatus;
     @BindView(R.id.button_toggle) TextView buttonToggle;
-
     @BindView(R.id.icon_status) TextView iconStatus;
+
+    @BindView(R.id.layout_no2) LinearLayout layoutNo2;
+    @BindView(R.id.divider_no2) View dividerNo2;
 
     @BindView(R.id.label_pm10) TextView labelPm10;
     @BindView(R.id.label_pm25) TextView labelPm25;
@@ -74,6 +76,10 @@ public class RegionPSIActivity extends PsyActionBarActivity implements View.OnCl
 
         ButterKnife.bind(this);
 
+        buttonToggle.setOnClickListener(this);
+        buttonToggle.setText(getString(R.string.button_toggle_see_more));
+        isSubIndex = true;
+
         regionReadings = getIntent().getExtras().getParcelable(KEY_REGION_PSI);
         String region = getIntent().getExtras().getString(KEY_REGION);
 
@@ -87,10 +93,6 @@ public class RegionPSIActivity extends PsyActionBarActivity implements View.OnCl
         } else {
             activityTitle.setText(getString(R.string.title_singapore_psi));
         }
-
-        buttonToggle.setOnClickListener(this);
-        buttonToggle.setText(getString(R.string.button_toggle_see_more));
-        isSubIndex = true;
     }
 
     @Override
@@ -187,8 +189,8 @@ public class RegionPSIActivity extends PsyActionBarActivity implements View.OnCl
         labelSo2.setText(superSubScript(getString(R.string.so2_sub_index), SUBSCRIPT_TYPE_C));
         setCurrentPsiLevel(textSo2Before, textSo2After, Float.parseFloat(regionReadings.getSo2SubIndex()));
 
-        labelNo2.setText(superSubScript(getString(R.string.no2_sub_index), SUBSCRIPT_TYPE_C));
-        setCurrentPsiLevel(textNo2Before, textNo2After, Float.parseFloat(regionReadings.getNo2OneHourMax()));
+        layoutNo2.setVisibility(View.GONE);
+        dividerNo2.setVisibility(View.GONE);
     }
 
     private void setPSIValuesHours(PSIRegionReadings regionReadings) {
@@ -207,10 +209,11 @@ public class RegionPSIActivity extends PsyActionBarActivity implements View.OnCl
         labelSo2.setText(superSubScript(getString(R.string.so2_twenty_four_hourly), SUBSCRIPT_TYPE_C));
         setCurrentPsiLevel(textSo2Before, textSo2After, Float.parseFloat(regionReadings.getSo2TwentyFourHourly()));
 
+        layoutNo2.setVisibility(View.VISIBLE);
+        dividerNo2.setVisibility(View.VISIBLE);
         labelNo2.setText(superSubScript(getString(R.string.no2_one_hour_max), SUBSCRIPT_TYPE_C));
         setCurrentPsiLevel(textNo2Before, textNo2After, Float.parseFloat(regionReadings.getNo2OneHourMax()));
     }
-
 
     private void setCurrentPsiLevel(TextView psiLevelBefore, TextView psiLevelAfter, float psi) {
         float ratioBefore = psi / PSIStatus.HAZARDOUS.getValue();
@@ -226,6 +229,6 @@ public class RegionPSIActivity extends PsyActionBarActivity implements View.OnCl
         params.weight = ratioBefore;
         psiLevelAfter.setLayoutParams(params);
 
-        psiLevelAfter.setText("▲");
+        psiLevelAfter.setText(FormatString.padRight("▲\n" + psi));
     }
 }

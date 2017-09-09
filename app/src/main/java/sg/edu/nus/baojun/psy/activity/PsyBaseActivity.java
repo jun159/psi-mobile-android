@@ -38,7 +38,7 @@ public class PsyBaseActivity extends AppCompatActivity {
     }
 
     public void handleAPICallFailure(Response<? extends Object> response) {
-        if (response.errorBody() != null) {
+        if (response != null && response.errorBody() != null) {
             try {
                 String error = getPsyApplication().getErrorConverter().convert(response.errorBody());
                 Snackbar snackbar = Snackbar.make(loadingView, error, Snackbar.LENGTH_SHORT);

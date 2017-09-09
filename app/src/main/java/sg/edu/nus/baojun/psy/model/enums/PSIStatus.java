@@ -1,7 +1,7 @@
 package sg.edu.nus.baojun.psy.model.enums;
 
 /**
- * Created by BAOJUN on 9/9/17.
+ * PSI status extracted from http://www.haze.gov.sg/
  */
 
 public enum PSIStatus {

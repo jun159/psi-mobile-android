@@ -17,4 +17,15 @@ public class FormatString {
 
         return s;
     }
+
+    public static String padRight(String s) {
+        int numSpaces = (s.length() - 2) / 2;
+        String paddedString = "";
+
+        for(int i = 0; i < numSpaces; i++) {
+            paddedString += " ";
+        }
+
+        return paddedString + s;
+    }
 }

@@ -13,460 +13,453 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/layout_header"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="180dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/icon_status"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/text_psi_region"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/text_psi_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/layout_pm10"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:background="@color/colorPrimary"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:layout_height="60dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
 
                     <TextView
-                        android:id="@+id/icon_status"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_marginBottom="10dp"
-                        android:gravity="center" />
+                        android:id="@+id/label_pm10"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.6"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/darker_gray" />
 
-                    <TextView
-                        android:id="@+id/text_psi_region"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:paddingBottom="5dp"
-                        android:textColor="@color/white"
-                        android:textSize="15sp" />
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2">
 
-                    <TextView
-                        android:id="@+id/text_psi_status"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:paddingBottom="5dp"
-                        android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        <TextView
+                            android:id="@+id/progress_pm10"
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/gradient"
+                            android:gravity="center" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/text_pm10_before"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.6"
+                                android:paddingTop="28dp"
+                                android:textColor="@color/darker_gray"
+                                android:textSize="9sp" />
+
+                            <TextView
+                                android:id="@+id/text_pm10_after"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.6"
+                                android:paddingTop="28dp"
+                                android:textColor="@color/darker_gray"
+                                android:textSize="9sp" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                 </LinearLayout>
 
-                <ScrollView
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@color/divider" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/layout_pm25"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+
+                    <TextView
+                        android:id="@+id/label_pm25"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.6"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/darker_gray" />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:id="@+id/progress_pm25"
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/gradient"
+                            android:gravity="center" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dp"
-                            android:paddingRight="15dp">
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/label_pm10"
+                                android:id="@+id/text_pm25_before"
                                 android:layout_width="0dp"
-                                android:layout_height="45dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1.6"
-                                android:gravity="center_vertical"
-                                android:textColor="@color/black" />
+                                android:paddingTop="28dp"
+                                android:textColor="@color/darker_gray"
+                                android:textSize="9sp" />
 
-                            <RelativeLayout
+                            <TextView
+                                android:id="@+id/text_pm25_after"
                                 android:layout_width="0dp"
-                                android:layout_height="47dp"
-                                android:layout_weight="2">
-
-                                <TextView
-                                    android:id="@+id/progress_pm10"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="10dp"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_marginTop="20dp"
-                                    android:background="@drawable/gradient"
-                                    android:gravity="center" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="47dp"
-                                    android:layout_alignParentEnd="true"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:id="@+id/text_pm10_before"
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1.6"
-                                        android:layout_height="match_parent"
-                                        android:paddingTop="28dp"
-                                        android:textColor="@color/darker_gray"
-                                        android:textSize="10sp" />
-
-                                    <TextView
-                                        android:id="@+id/text_pm10_after"
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1.6"
-                                        android:layout_height="match_parent"
-                                        android:paddingTop="28dp"
-                                        android:textColor="@color/darker_gray"
-                                        android:textSize="10sp" />
-
-                                </LinearLayout>
-
-                            </RelativeLayout>
-
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.6"
+                                android:paddingTop="28dp"
+                                android:textColor="@color/darker_gray"
+                                android:textSize="9sp" />
                         </LinearLayout>
 
-                        <View
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@color/divider" />
+
+                <LinearLayout
+                    android:id="@+id/layout_co"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+
+                    <TextView
+                        android:id="@+id/label_co"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_weight="1.6"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/darker_gray" />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:id="@+id/progress_co"
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginLeft="15dp"
-                            android:background="@color/divider" />
+                            android:layout_height="10dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/gradient"
+                            android:gravity="center" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dp"
-                            android:paddingRight="15dp">
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/label_pm25"
+                                android:id="@+id/text_co_before"
                                 android:layout_width="0dp"
-                                android:layout_height="45dp"
-                                android:layout_alignParentLeft="true"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1.6"
-                                android:gravity="center_vertical"
-                                android:textColor="@color/black" />
+                                android:paddingTop="28dp"
+                                android:textColor="@color/darker_gray"
+                                android:textSize="9sp" />
 
-                            <RelativeLayout
+                            <TextView
+                                android:id="@+id/text_co_after"
                                 android:layout_width="0dp"
-                                android:layout_height="47dp"
-                                android:layout_weight="2">
-
-                                <TextView
-                                    android:id="@+id/progress_pm25"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="10dp"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_marginTop="20dp"
-                                    android:background="@drawable/gradient"
-                                    android:gravity="center" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="47dp"
-                                    android:layout_alignParentEnd="true"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:id="@+id/text_pm25_before"
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1.6"
-                                        android:layout_height="match_parent"
-                                        android:paddingTop="28dp"
-                                        android:textColor="@color/darker_gray"
-                                        android:textSize="10sp" />
-
-                                    <TextView
-                                        android:id="@+id/text_pm25_after"
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1.6"
-                                        android:layout_height="match_parent"
-                                        android:paddingTop="28dp"
-                                        android:textColor="@color/darker_gray"
-                                        android:textSize="10sp" />
-                                </LinearLayout>
-
-                            </RelativeLayout>
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.6"
+                                android:paddingTop="28dp"
+                                android:textColor="@color/darker_gray"
+                                android:textSize="9sp" />
 
                         </LinearLayout>
 
-                        <View
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@color/divider" />
+
+                <LinearLayout
+                    android:id="@+id/layout_o3"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+
+                    <TextView
+                        android:id="@+id/label_o3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.6"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/darker_gray" />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:id="@+id/progress_o3"
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginLeft="15dp"
-                            android:background="@color/divider" />
+                            android:layout_height="10dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/gradient"
+                            android:gravity="center" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dp"
-                            android:paddingRight="15dp">
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/label_co"
+                                android:id="@+id/text_o3_before"
                                 android:layout_width="0dp"
-                                android:layout_height="45dp"
-                                android:layout_alignParentLeft="true"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1.6"
-                                android:gravity="center_vertical"
-                                android:textColor="@color/black" />
+                                android:paddingTop="28dp"
+                                android:textColor="@color/darker_gray"
+                                android:textSize="9sp" />
 
-                            <RelativeLayout
+                            <TextView
+                                android:id="@+id/text_o3_after"
                                 android:layout_width="0dp"
-                                android:layout_height="47dp"
-                                android:layout_alignParentRight="true"
-                                android:layout_weight="2">
-
-                                <TextView
-                                    android:id="@+id/progress_co"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="10dp"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_marginTop="20dp"
-                                    android:background="@drawable/gradient"
-                                    android:gravity="center" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="47dp"
-                                    android:layout_alignParentEnd="true"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:id="@+id/text_co_before"
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1.6"
-                                        android:layout_height="match_parent"
-                                        android:paddingTop="28dp"
-                                        android:textColor="@color/darker_gray"
-                                        android:textSize="10sp" />
-
-                                    <TextView
-                                        android:id="@+id/text_co_after"
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1.6"
-                                        android:layout_height="match_parent"
-                                        android:paddingTop="28dp"
-                                        android:textColor="@color/darker_gray"
-                                        android:textSize="10sp" />
-
-                                </LinearLayout>
-
-                            </RelativeLayout>
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.6"
+                                android:paddingTop="28dp"
+                                android:textColor="@color/darker_gray"
+                                android:textSize="9sp" />
 
                         </LinearLayout>
 
-                        <View
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@color/divider" />
+
+                <LinearLayout
+                    android:id="@+id/layout_so2"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+
+                    <TextView
+                        android:id="@+id/label_so2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.6"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/darker_gray" />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:id="@+id/progress_so2"
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginLeft="15dp"
-                            android:background="@color/divider" />
+                            android:layout_height="10dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/gradient"
+                            android:gravity="center" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dp"
-                            android:paddingRight="15dp">
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/label_o3"
+                                android:id="@+id/text_so2_before"
                                 android:layout_width="0dp"
-                                android:layout_height="45dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1.6"
-                                android:gravity="center_vertical"
-                                android:textColor="@color/black" />
+                                android:paddingTop="28dp"
+                                android:textColor="@color/darker_gray"
+                                android:textSize="9sp" />
 
-                            <RelativeLayout
+                            <TextView
+                                android:id="@+id/text_so2_after"
                                 android:layout_width="0dp"
-                                android:layout_height="47dp"
-                                android:layout_weight="2">
-
-                                <TextView
-                                    android:id="@+id/progress_o3"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="10dp"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_marginTop="20dp"
-                                    android:background="@drawable/gradient"
-                                    android:gravity="center" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="47dp"
-                                    android:layout_alignParentEnd="true"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:id="@+id/text_o3_before"
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1.6"
-                                        android:layout_height="match_parent"
-                                        android:paddingTop="28dp"
-                                        android:textColor="@color/darker_gray"
-                                        android:textSize="10sp" />
-
-                                    <TextView
-                                        android:id="@+id/text_o3_after"
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1.6"
-                                        android:layout_height="match_parent"
-                                        android:paddingTop="28dp"
-                                        android:textColor="@color/darker_gray"
-                                        android:textSize="10sp" />
-
-                                </LinearLayout>
-
-                            </RelativeLayout>
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.6"
+                                android:paddingTop="28dp"
+                                android:textColor="@color/darker_gray"
+                                android:textSize="9sp" />
 
                         </LinearLayout>
 
-                        <View
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@color/divider" />
+
+                <LinearLayout
+                    android:id="@+id/layout_no2"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+
+                    <TextView
+                        android:id="@+id/label_no2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.6"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/darker_gray" />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:id="@+id/progress_no2"
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginLeft="15dp"
-                            android:background="@color/divider" />
+                            android:layout_height="10dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/gradient"
+                            android:gravity="center" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dp"
-                            android:paddingRight="15dp">
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/label_so2"
+                                android:id="@+id/text_no2_before"
                                 android:layout_width="0dp"
-                                android:layout_height="45dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1.6"
-                                android:gravity="center_vertical"
-                                android:textColor="@color/black" />
+                                android:paddingTop="28dp"
+                                android:textColor="@color/darker_gray"
+                                android:textSize="9sp" />
 
-                            <RelativeLayout
+                            <TextView
+                                android:id="@+id/text_no2_after"
                                 android:layout_width="0dp"
-                                android:layout_height="47dp"
-                                android:layout_weight="2">
-
-                                <TextView
-                                    android:id="@+id/progress_so2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="10dp"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_marginTop="20dp"
-                                    android:background="@drawable/gradient"
-                                    android:gravity="center" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="47dp"
-                                    android:layout_alignParentEnd="true"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:id="@+id/text_so2_before"
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1.6"
-                                        android:layout_height="match_parent"
-                                        android:paddingTop="28dp"
-                                        android:textColor="@color/darker_gray"
-                                        android:textSize="10sp" />
-
-                                    <TextView
-                                        android:id="@+id/text_so2_after"
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1.6"
-                                        android:layout_height="match_parent"
-                                        android:paddingTop="28dp"
-                                        android:textColor="@color/darker_gray"
-                                        android:textSize="10sp" />
-
-                                </LinearLayout>
-
-                            </RelativeLayout>
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.6"
+                                android:paddingTop="28dp"
+                                android:textColor="@color/darker_gray"
+                                android:textSize="9sp" />
 
                         </LinearLayout>
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginLeft="15dp"
-                            android:background="@color/divider" />
+                    </RelativeLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:orientation="horizontal"
-                            android:paddingLeft="15dp"
-                            android:paddingRight="15dp">
+                </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/label_no2"
-                                android:layout_width="0dp"
-                                android:layout_height="45dp"
-                                android:layout_weight="1.6"
-                                android:gravity="center_vertical"
-                                android:textColor="@color/black" />
-
-                            <RelativeLayout
-                                android:layout_width="0dp"
-                                android:layout_height="47dp"
-                                android:layout_weight="2">
-
-                                <TextView
-                                    android:id="@+id/progress_no2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="10dp"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_marginTop="20dp"
-                                    android:background="@drawable/gradient"
-                                    android:gravity="center"/>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="47dp"
-                                    android:layout_alignParentEnd="true"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:id="@+id/text_no2_before"
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1.6"
-                                        android:layout_height="match_parent"
-                                        android:paddingTop="28dp"
-                                        android:textColor="@color/darker_gray"
-                                        android:textSize="10sp" />
-
-                                    <TextView
-                                        android:id="@+id/text_no2_after"
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1.6"
-                                        android:layout_height="match_parent"
-                                        android:paddingTop="28dp"
-                                        android:textColor="@color/darker_gray"
-                                        android:textSize="10sp" />
-
-                                </LinearLayout>
-
-                            </RelativeLayout>
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginLeft="15dp"
-                            android:background="@color/divider" />
-
-                    </LinearLayout>
-
-                </ScrollView>
+                <View
+                    android:id="@+id/divider_no2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@color/divider" />
 
             </LinearLayout>
 
-        </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 
