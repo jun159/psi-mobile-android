@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -54,7 +53,6 @@ public class MainActivity extends PsyActionBarActivity implements
     private static final double SINGAPORE_EAST_LATITUDE = 104.094500;
     private static final float ZOOM = 10.3F;
 
-    @BindView(R.id.mainSwipeLayout) SwipeRefreshLayout mainSwipeLayout;
     @BindView(R.id.text_last_updated) TextView textLastUpdated;
     @BindView(R.id.activityTitle) TextView activityTitle;
 
@@ -99,15 +97,6 @@ public class MainActivity extends PsyActionBarActivity implements
         mapFragment.getMapAsync(this);
 
         textLastUpdated.setVisibility(View.GONE);
-        mainSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if(map != null) {
-                    getCurrentPSILevel();
-                    mainSwipeLayout.setRefreshing(true);
-                }
-            }
-        });
     }
 
     @Override
@@ -170,7 +159,6 @@ public class MainActivity extends PsyActionBarActivity implements
         Callback<GetPSIResponse> callback = new Callback<GetPSIResponse>() {
             @Override
             public void onResponse(Call<GetPSIResponse> call, Response<GetPSIResponse> response) {
-                mainSwipeLayout.setRefreshing(false);
                 textLastUpdated.setVisibility(View.VISIBLE);
 
                 if (response.isSuccessful()) {
@@ -219,7 +207,6 @@ public class MainActivity extends PsyActionBarActivity implements
 
             @Override
             public void onFailure(Call<GetPSIResponse> call, Throwable t) {
-                mainSwipeLayout.setRefreshing(false);
                 handleNetworkFailure();
                 if(textLastUpdated.getText().toString().isEmpty()) {
                     textLastUpdated.setVisibility(View.GONE);
