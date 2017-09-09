@@ -8,12 +8,14 @@
     <color name="white">#ffffff</color>
     <color name="white_three">#f0f0f0</color>
     <color name="gray">#ececec</color>
-    <color name="darker_gray">#b3b3b3</color>
+    <color name="darker_gray">#4b4b4b</color>
 
     <color name="divider">#F2F2F3</color>
     <color name="progress">#EF9A9A</color>
 
-    <color name="healthy">#1e9f75</color>
-    <color name="moderate">#FF9800</color>
-    <color name="unhealthy">#F44336</color>
+    <color name="healthy">#60fa31</color>
+    <color name="moderate">#c4f834</color>
+    <color name="unhealthy">#fcc52f</color>
+    <color name="very_unhealthy">#f86e25</color>
+    <color name="hazardous">#f5001d</color>
 </resources>
