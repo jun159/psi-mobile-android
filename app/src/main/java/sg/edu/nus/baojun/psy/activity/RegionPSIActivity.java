@@ -1,5 +1,7 @@
 package sg.edu.nus.baojun.psy.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
@@ -7,6 +9,7 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.SubscriptSpan;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,11 +34,12 @@ public class RegionPSIActivity extends PsyActionBarActivity implements View.OnCl
     private static final int SUBSCRIPT_TYPE_B = 1;
     private static final int SUBSCRIPT_TYPE_C = 2;
 
-    @BindView(R.id.activityTitle) TextView activityTitle;
+    @BindView(R.id.activity_title) TextView activityTitle;
     @BindView(R.id.text_psi_region) TextView textPSIRegion;
     @BindView(R.id.text_psi_status) TextView textPSIStatus;
     @BindView(R.id.button_toggle) TextView buttonToggle;
     @BindView(R.id.icon_status) TextView iconStatus;
+    @BindView(R.id.icon_info) TextView iconInfo;
 
     @BindView(R.id.layout_no2) LinearLayout layoutNo2;
     @BindView(R.id.divider_no2) View dividerNo2;
@@ -76,6 +80,7 @@ public class RegionPSIActivity extends PsyActionBarActivity implements View.OnCl
 
         ButterKnife.bind(this);
 
+        iconInfo.setOnClickListener(this);
         buttonToggle.setOnClickListener(this);
         buttonToggle.setText(getString(R.string.button_toggle_see_more));
         isSubIndex = true;
@@ -98,6 +103,11 @@ public class RegionPSIActivity extends PsyActionBarActivity implements View.OnCl
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.icon_info : {
+                alertDialogLegend();
+                break;
+            }
+
             case R.id.button_toggle : {
                 if(isSubIndex) {
                     buttonToggle.setText(getString(R.string.button_toggle_sub_index));
@@ -116,6 +126,23 @@ public class RegionPSIActivity extends PsyActionBarActivity implements View.OnCl
                 break;
             }
         }
+    }
+
+    public void alertDialogLegend() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(RegionPSIActivity.this);
+        builder.setTitle(getString(R.string.title_alert_legend));
+        LayoutInflater inflater = getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout.dialog_legend, null));
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 
     private int getHealthStatusDrawable(double psiLevel) {

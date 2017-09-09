@@ -1,10 +1,11 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="TypographyDashes">
     <string name="app_name">PSY</string>
     <string name="title_singapore_psi">Singapore PSI</string>
     <string name="title_national_psi">National 24-hr PSI: %1$s (%2$s)</string>
     <string name="title_region_psi">%1$s PSI</string>
     <string name="title_twenty_four_hours">24-hrs</string>
     <string name="title_three_hours">3-hrs</string>
+    <string name="title_alert_legend">General Health Effects</string>
 
     <string name="api_server_address">https://api.data.gov.sg/v1/</string>
     <string name="api_key">Jo1YPLMsSq5D6WameuUAxvY6PNQTEG31</string>
@@ -25,23 +26,35 @@
     <string name="pm10_twenty_four_hourly">PM10 24-Hourly</string>
     <string name="pm10_sub_index">PM10 Sub Index</string>
     <string name="co_sub_index">CO Sub Index</string>
-    <string name="pm25_twenty_four_hourly">PM25 24-Hourly</string>
+    <string name="pm25_twenty_four_hourly">PM2.5 24-Hourly</string>
     <string name="so2_sub_index">SO2 Sub Index</string>
     <string name="co_eight_hour_max">CO 8-Hours Max</string>
     <string name="no2_sub_index">NO2 Sub Index</string>
     <string name="no2_one_hour_max">NO2 1-Hour Max</string>
     <string name="so2_twenty_four_hourly">SO2 24-Hourly</string>
-    <string name="pm25_sub_index">PM25 Sub Index</string>
+    <string name="pm25_sub_index">PM2.5 Sub Index</string>
     <string name="o3_eight_hour_max">O3 8-Hours Max</string>
 
     <string name="region_psi">%1$s PSI: %2$s</string>
     <string name="region_psi_status">Status: %1$s</string>
 
-    <string name="status_healthy">Healthy</string>
+    <string name="status_healthy">Good</string>
     <string name="status_moderate">Moderate</string>
     <string name="status_unhealthy">Unhealthy</string>
     <string name="status_very_unhealthy">Very Unhealthy</string>
     <string name="status_hazardous">Hazardous</string>
+
+    <string name="status_healthy_range">0-50</string>
+    <string name="status_moderate_range">51-100</string>
+    <string name="status_unhealthy_range">101-200</string>
+    <string name="status_very_unhealthy_range">201-300</string>
+    <string name="status_hazardous_range">&gt;300</string>
+
+    <string name="status_healthy_message">No bad effect on health.</string>
+    <string name="status_moderate_message">Health condition may be affected by few or none of general population.</string>
+    <string name="status_unhealthy_message">Everyone may begin to experience health effects.</string>
+    <string name="status_very_unhealthy_message">Health warnings of emergency conditions. </string>
+    <string name="status_hazardous_message">Everyone may experience more serious health effects.</string>
 
     <string name="hint_network_failure">No connection detected. Please try again.</string>
     <string name="hint_unknown_api_error">An error has occurred. Please try again later.</string>

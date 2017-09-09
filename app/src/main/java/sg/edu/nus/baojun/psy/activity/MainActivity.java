@@ -1,11 +1,14 @@
 package sg.edu.nus.baojun.psy.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -54,7 +57,8 @@ public class MainActivity extends PsyActionBarActivity implements
     private static final float ZOOM = 10.3F;
 
     @BindView(R.id.text_last_updated) TextView textLastUpdated;
-    @BindView(R.id.activityTitle) TextView activityTitle;
+    @BindView(R.id.activity_title) TextView activityTitle;
+    @BindView(R.id.icon_info) TextView iconInfo;
 
     @BindView(R.id.layout_psi_west) LinearLayout layoutPSIWest;
     @BindView(R.id.layout_psi_north) LinearLayout layoutPSINorth;
@@ -96,6 +100,7 @@ public class MainActivity extends PsyActionBarActivity implements
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        iconInfo.setOnClickListener(this);
         textLastUpdated.setVisibility(View.GONE);
     }
 
@@ -127,6 +132,23 @@ public class MainActivity extends PsyActionBarActivity implements
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         handleNetworkFailure();
+    }
+
+    public void alertDialogLegend() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(getString(R.string.title_alert_legend));
+        LayoutInflater inflater = getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout.dialog_legend, null));
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 
     private void changeRegionUnSelectedColor(TextView labelView, TextView textView) {
@@ -284,7 +306,9 @@ public class MainActivity extends PsyActionBarActivity implements
 
     @Override
     public void onClick(View view) {
-        if(map != null && psiItem != null) {
+        if(view.getId() == R.id.icon_info) {
+            alertDialogLegend();
+        } else if(map != null && psiItem != null) {
             String region = "";
             String o3SubIndex = "";
             String pm10TwentyFourHourly = "";
