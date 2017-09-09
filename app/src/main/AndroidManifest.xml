@@ -26,6 +26,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activity.RegionPSIActivity"
+            android:label="@string/title_region_psi"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

@@ -1,12 +1,15 @@
 package sg.edu.nus.baojun.psy.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by BAOJUN on 9/6/17.
  */
 
-public class PSIReading {
+public class PSIReading implements Parcelable {
     public static final String WEST = "west";
     public static final String NATIONAL = "national";
     public static final String EAST = "east";
@@ -74,4 +77,40 @@ public class PSIReading {
     public void setNorth(double north) {
         this.north = north;
     }
+
+    private PSIReading(Parcel in) {
+        west = in.readDouble();
+        national = in.readDouble();
+        east = in.readDouble();
+        central = in.readDouble();
+        south = in.readDouble();
+        north = in.readDouble();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeDouble(west);
+        dest.writeDouble(national);
+        dest.writeDouble(east);
+        dest.writeDouble(central);
+        dest.writeDouble(south);
+        dest.writeDouble(north);
+    }
+
+    public static final Creator<PSIReading> CREATOR = new Creator<PSIReading>() {
+        @Override
+        public PSIReading createFromParcel(Parcel in) {
+            return new PSIReading(in);
+        }
+
+        @Override
+        public PSIReading[] newArray(int size) {
+            return new PSIReading[size];
+        }
+    };
 }

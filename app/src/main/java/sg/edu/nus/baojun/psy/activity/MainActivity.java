@@ -1,10 +1,13 @@
 package sg.edu.nus.baojun.psy.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -30,11 +33,13 @@ import sg.edu.nus.baojun.psy.PsyApplication;
 import sg.edu.nus.baojun.psy.R;
 import sg.edu.nus.baojun.psy.model.PSIItem;
 import sg.edu.nus.baojun.psy.model.PSIReading;
+import sg.edu.nus.baojun.psy.model.PSIRegionReadings;
 import sg.edu.nus.baojun.psy.model.RegionMetadata;
 import sg.edu.nus.baojun.psy.network.GetPSIResponse;
 import sg.edu.nus.baojun.psy.utils.FormatString;
 
 public class MainActivity extends PsyActionBarActivity implements
+        View.OnClickListener,
         OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -47,6 +52,17 @@ public class MainActivity extends PsyActionBarActivity implements
     private static final double SINGAPORE_NORTH_LATITUDE = 1.478400;
     private static final double SINGAPORE_EAST_LATITUDE = 104.094500;
     private static final float ZOOM = 10.3F;
+
+    @BindView(R.id.layout_psi_west)
+    LinearLayout layoutPSIWest;
+    @BindView(R.id.layout_psi_north)
+    LinearLayout layoutPSINorth;
+    @BindView(R.id.layout_psi_central)
+    LinearLayout layoutPSICentral;
+    @BindView(R.id.layout_psi_south)
+    LinearLayout layoutPSISouth;
+    @BindView(R.id.layout_psi_east)
+    LinearLayout layoutPSIEast;
 
     @BindView(R.id.label_psi_west)
     TextView labelPSIWest;
@@ -85,6 +101,11 @@ public class MainActivity extends PsyActionBarActivity implements
         ButterKnife.bind(this);
 
         activityTitle.setText(getString(R.string.title_singapore_psi));
+        layoutPSIWest.setOnClickListener(this);
+        layoutPSINorth.setOnClickListener(this);
+        layoutPSICentral.setOnClickListener(this);
+        layoutPSISouth.setOnClickListener(this);
+        layoutPSIEast.setOnClickListener(this);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -119,69 +140,6 @@ public class MainActivity extends PsyActionBarActivity implements
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         handleNetworkFailure();
-    }
-
-    @Override
-    public boolean onMarkerClick(Marker marker) {
-        if (this.marker != null) {
-            this.marker.setIcon(BitmapDescriptorFactory.defaultMarker());
-        }
-        this.marker = marker;
-        this.marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
-
-        String currentMarker = this.marker.getTitle();
-        switch (currentMarker) {
-            case PSIReading.WEST : {
-                changeRegionSelectedColor(labelPSIWest, textPSIWest);
-                changeRegionUnSelectedColor(labelPSINorth, textPSINorth);
-                changeRegionUnSelectedColor(labelPSICentral, textPSICentral);
-                changeRegionUnSelectedColor(labelPSISouth, textPSISouth);
-                changeRegionUnSelectedColor(labelPSIEast, textPSIEast);
-                break;
-            }
-
-            case PSIReading.NORTH : {
-                changeRegionSelectedColor(labelPSINorth, textPSINorth);
-                changeRegionUnSelectedColor(labelPSIWest, textPSIWest);
-                changeRegionUnSelectedColor(labelPSICentral, textPSICentral);
-                changeRegionUnSelectedColor(labelPSISouth, textPSISouth);
-                changeRegionUnSelectedColor(labelPSIEast, textPSIEast);
-                break;
-            }
-
-            case PSIReading.CENTRAL : {
-                changeRegionSelectedColor(labelPSICentral, textPSICentral);
-                changeRegionUnSelectedColor(labelPSIWest, textPSIWest);
-                changeRegionUnSelectedColor(labelPSINorth, textPSINorth);
-                changeRegionUnSelectedColor(labelPSISouth, textPSISouth);
-                changeRegionUnSelectedColor(labelPSIEast, textPSIEast);
-                break;
-            }
-
-            case PSIReading.SOUTH : {
-                changeRegionSelectedColor(labelPSISouth, textPSISouth);
-                changeRegionUnSelectedColor(labelPSIWest, textPSIWest);
-                changeRegionUnSelectedColor(labelPSINorth, textPSINorth);
-                changeRegionUnSelectedColor(labelPSICentral, textPSICentral);
-                changeRegionUnSelectedColor(labelPSIEast, textPSIEast);
-                break;
-            }
-
-            case PSIReading.EAST : {
-                changeRegionSelectedColor(labelPSIEast, textPSIEast);
-                changeRegionUnSelectedColor(labelPSIWest, textPSIWest);
-                changeRegionUnSelectedColor(labelPSINorth, textPSINorth);
-                changeRegionUnSelectedColor(labelPSICentral, textPSICentral);
-                changeRegionUnSelectedColor(labelPSISouth, textPSISouth);
-                break;
-            }
-
-            default: {
-                break;
-            }
-        }
-
-        return true;
     }
 
     private void changeRegionUnSelectedColor(TextView labelView, TextView textView) {
@@ -251,5 +209,187 @@ public class MainActivity extends PsyActionBarActivity implements
         };
 
         call.enqueue(callback);
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        if (this.marker != null) {
+            this.marker.setIcon(BitmapDescriptorFactory.defaultMarker());
+        }
+        this.marker = marker;
+        this.marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+
+        String currentMarker = this.marker.getTitle();
+        switch (currentMarker) {
+            case PSIReading.WEST : {
+                changeRegionSelectedColor(labelPSIWest, textPSIWest);
+                changeRegionUnSelectedColor(labelPSINorth, textPSINorth);
+                changeRegionUnSelectedColor(labelPSICentral, textPSICentral);
+                changeRegionUnSelectedColor(labelPSISouth, textPSISouth);
+                changeRegionUnSelectedColor(labelPSIEast, textPSIEast);
+                break;
+            }
+
+            case PSIReading.NORTH : {
+                changeRegionSelectedColor(labelPSINorth, textPSINorth);
+                changeRegionUnSelectedColor(labelPSIWest, textPSIWest);
+                changeRegionUnSelectedColor(labelPSICentral, textPSICentral);
+                changeRegionUnSelectedColor(labelPSISouth, textPSISouth);
+                changeRegionUnSelectedColor(labelPSIEast, textPSIEast);
+                break;
+            }
+
+            case PSIReading.CENTRAL : {
+                changeRegionSelectedColor(labelPSICentral, textPSICentral);
+                changeRegionUnSelectedColor(labelPSIWest, textPSIWest);
+                changeRegionUnSelectedColor(labelPSINorth, textPSINorth);
+                changeRegionUnSelectedColor(labelPSISouth, textPSISouth);
+                changeRegionUnSelectedColor(labelPSIEast, textPSIEast);
+                break;
+            }
+
+            case PSIReading.SOUTH : {
+                changeRegionSelectedColor(labelPSISouth, textPSISouth);
+                changeRegionUnSelectedColor(labelPSIWest, textPSIWest);
+                changeRegionUnSelectedColor(labelPSINorth, textPSINorth);
+                changeRegionUnSelectedColor(labelPSICentral, textPSICentral);
+                changeRegionUnSelectedColor(labelPSIEast, textPSIEast);
+                break;
+            }
+
+            case PSIReading.EAST : {
+                changeRegionSelectedColor(labelPSIEast, textPSIEast);
+                changeRegionUnSelectedColor(labelPSIWest, textPSIWest);
+                changeRegionUnSelectedColor(labelPSINorth, textPSINorth);
+                changeRegionUnSelectedColor(labelPSICentral, textPSICentral);
+                changeRegionUnSelectedColor(labelPSISouth, textPSISouth);
+                break;
+            }
+
+            default: {
+                break;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        String region = "";
+        String o3SubIndex = "";
+        String pm10TwentyFourHourly = "";
+        String pm10SubIndex = "";
+        String coSubIndex = "";
+        String pm25TwentyFourHourly = "";
+        String so2SubIndex = "";
+        String coEightHourMax = "";
+        String no2OneHourMax = "";
+        String so2TwentyFourHourly = "";
+        String pm25SubIndex = "";
+        String psiTwentyFourHourly = "";
+        String o3EightHourMax = "";
+
+        switch (view.getId()) {
+            case R.id.layout_psi_west : {
+                region = PSIReading.WEST;
+                o3SubIndex = String.valueOf(psiItem.getPsiReadings().getO3SubIndex().getWest());
+                pm10TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm10TwentyFourHourly().getWest());
+                pm10SubIndex = String.valueOf(psiItem.getPsiReadings().getPm10SubIndex().getWest());
+                coSubIndex = String.valueOf(psiItem.getPsiReadings().getCoSubIndex().getWest());
+                pm25TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm25TwentyFourHourly().getWest());
+                so2SubIndex = String.valueOf(psiItem.getPsiReadings().getSo2SubIndex().getWest());
+                coEightHourMax = String.valueOf(psiItem.getPsiReadings().getCoEightHourMax().getWest());
+                no2OneHourMax = String.valueOf(psiItem.getPsiReadings().getNo2OneHourMax().getWest());
+                so2TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getSo2TwentyFourHourly().getWest());
+                pm25SubIndex = String.valueOf(psiItem.getPsiReadings().getPm25SubIndex().getWest());
+                psiTwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPsiTwentyFourHourly().getWest());
+                o3EightHourMax = String.valueOf(psiItem.getPsiReadings().getO3EightHourMax().getWest());
+                break;
+            }
+
+            case R.id.layout_psi_north : {
+                region = PSIReading.NORTH;
+                o3SubIndex = String.valueOf(psiItem.getPsiReadings().getO3SubIndex().getNorth());
+                pm10TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm10TwentyFourHourly().getNorth());
+                pm10SubIndex = String.valueOf(psiItem.getPsiReadings().getPm10SubIndex().getNorth());
+                coSubIndex = String.valueOf(psiItem.getPsiReadings().getCoSubIndex().getNorth());
+                pm25TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm25TwentyFourHourly().getNorth());
+                so2SubIndex = String.valueOf(psiItem.getPsiReadings().getSo2SubIndex().getNorth());
+                coEightHourMax = String.valueOf(psiItem.getPsiReadings().getCoEightHourMax().getNorth());
+                no2OneHourMax = String.valueOf(psiItem.getPsiReadings().getNo2OneHourMax().getNorth());
+                so2TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getSo2TwentyFourHourly().getNorth());
+                pm25SubIndex = String.valueOf(psiItem.getPsiReadings().getPm25SubIndex().getNorth());
+                psiTwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPsiTwentyFourHourly().getNorth());
+                o3EightHourMax = String.valueOf(psiItem.getPsiReadings().getO3EightHourMax().getNorth());
+                break;
+            }
+
+            case R.id.layout_psi_central : {
+                region = PSIReading.CENTRAL;
+                o3SubIndex = String.valueOf(psiItem.getPsiReadings().getO3SubIndex().getCentral());
+                pm10TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm10TwentyFourHourly().getCentral());
+                pm10SubIndex = String.valueOf(psiItem.getPsiReadings().getPm10SubIndex().getCentral());
+                coSubIndex = String.valueOf(psiItem.getPsiReadings().getCoSubIndex().getCentral());
+                pm25TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm25TwentyFourHourly().getCentral());
+                so2SubIndex = String.valueOf(psiItem.getPsiReadings().getSo2SubIndex().getCentral());
+                coEightHourMax = String.valueOf(psiItem.getPsiReadings().getCoEightHourMax().getCentral());
+                no2OneHourMax = String.valueOf(psiItem.getPsiReadings().getNo2OneHourMax().getCentral());
+                so2TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getSo2TwentyFourHourly().getCentral());
+                pm25SubIndex = String.valueOf(psiItem.getPsiReadings().getPm25SubIndex().getCentral());
+                psiTwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPsiTwentyFourHourly().getCentral());
+                o3EightHourMax = String.valueOf(psiItem.getPsiReadings().getO3EightHourMax().getCentral());
+                break;
+            }
+
+            case R.id.layout_psi_south : {
+                region = PSIReading.SOUTH;
+                o3SubIndex = String.valueOf(psiItem.getPsiReadings().getO3SubIndex().getSouth());
+                pm10TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm10TwentyFourHourly().getSouth());
+                pm10SubIndex = String.valueOf(psiItem.getPsiReadings().getPm10SubIndex().getSouth());
+                coSubIndex = String.valueOf(psiItem.getPsiReadings().getCoSubIndex().getSouth());
+                pm25TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm25TwentyFourHourly().getSouth());
+                so2SubIndex = String.valueOf(psiItem.getPsiReadings().getSo2SubIndex().getSouth());
+                coEightHourMax = String.valueOf(psiItem.getPsiReadings().getCoEightHourMax().getSouth());
+                no2OneHourMax = String.valueOf(psiItem.getPsiReadings().getNo2OneHourMax().getSouth());
+                so2TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getSo2TwentyFourHourly().getSouth());
+                pm25SubIndex = String.valueOf(psiItem.getPsiReadings().getPm25SubIndex().getSouth());
+                psiTwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPsiTwentyFourHourly().getSouth());
+                o3EightHourMax = String.valueOf(psiItem.getPsiReadings().getO3EightHourMax().getSouth());
+                break;
+            }
+
+            case R.id.layout_psi_east : {
+                region = PSIReading.EAST;
+                o3SubIndex = String.valueOf(psiItem.getPsiReadings().getO3SubIndex().getEast());
+                pm10TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm10TwentyFourHourly().getEast());
+                pm10SubIndex = String.valueOf(psiItem.getPsiReadings().getPm10SubIndex().getEast());
+                coSubIndex = String.valueOf(psiItem.getPsiReadings().getCoSubIndex().getEast());
+                pm25TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPm25TwentyFourHourly().getEast());
+                so2SubIndex = String.valueOf(psiItem.getPsiReadings().getSo2SubIndex().getEast());
+                coEightHourMax = String.valueOf(psiItem.getPsiReadings().getCoEightHourMax().getEast());
+                no2OneHourMax = String.valueOf(psiItem.getPsiReadings().getNo2OneHourMax().getEast());
+                so2TwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getSo2TwentyFourHourly().getEast());
+                pm25SubIndex = String.valueOf(psiItem.getPsiReadings().getPm25SubIndex().getEast());
+                psiTwentyFourHourly = String.valueOf(psiItem.getPsiReadings().getPsiTwentyFourHourly().getEast());
+                o3EightHourMax = String.valueOf(psiItem.getPsiReadings().getO3EightHourMax().getEast());
+                break;
+            }
+
+            default: {
+                break;
+            }
+        }
+
+        PSIRegionReadings regionReadings = new PSIRegionReadings(
+                o3SubIndex, pm10TwentyFourHourly, pm10SubIndex,
+                coSubIndex, pm25TwentyFourHourly, so2SubIndex,
+                coEightHourMax, no2OneHourMax, so2TwentyFourHourly,
+                pm25SubIndex, psiTwentyFourHourly, o3EightHourMax);
+
+        Intent intent = new Intent(this, RegionPSIActivity.class);
+        intent.putExtra(RegionPSIActivity.KEY_REGION, region);
+        intent.putExtra(RegionPSIActivity.KEY_REGION_PSI, regionReadings);
+        startActivity(intent);
     }
 }
