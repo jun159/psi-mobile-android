@@ -12,7 +12,7 @@ public enum PSIStatus {
     UNHEALTHY_MAX(200),
     VERY_UNHEALTHY_MIN(201),
     VERY_UNHEALTHY_MAX(300),
-    HAZARDOUS(300);
+    HAZARDOUS(500);
 
     private int value;
 
