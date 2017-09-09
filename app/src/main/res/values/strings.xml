@@ -38,7 +38,7 @@
     <string name="region_psi">%1$s PSI: %2$s</string>
     <string name="region_psi_status">Status: %1$s</string>
 
-    <string name="status_healthy">Good</string>
+    <string name="status_healthy">Healthy</string>
     <string name="status_moderate">Moderate</string>
     <string name="status_unhealthy">Unhealthy</string>
     <string name="status_very_unhealthy">Very Unhealthy</string>
