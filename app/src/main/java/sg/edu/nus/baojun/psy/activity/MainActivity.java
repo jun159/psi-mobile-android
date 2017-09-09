@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -58,7 +59,7 @@ public class MainActivity extends PsyActionBarActivity implements
 
     @BindView(R.id.text_last_updated) TextView textLastUpdated;
     @BindView(R.id.activity_title) TextView activityTitle;
-    @BindView(R.id.icon_info) TextView iconInfo;
+    @BindView(R.id.icon_info) RelativeLayout iconInfo;
 
     @BindView(R.id.layout_psi_west) LinearLayout layoutPSIWest;
     @BindView(R.id.layout_psi_north) LinearLayout layoutPSINorth;

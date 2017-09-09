@@ -12,6 +12,7 @@ import android.text.style.SubscriptSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -30,16 +31,17 @@ public class RegionPSIActivity extends PsyActionBarActivity implements View.OnCl
     public static final String KEY_REGION = "KEY_REGION";
     public static final String KEY_REGION_PSI = "KEY_REGION_PSI";
 
-    private static final int SUBSCRIPT_TYPE_A = 0;
-    private static final int SUBSCRIPT_TYPE_B = 1;
-    private static final int SUBSCRIPT_TYPE_C = 2;
+    private static final int SUPERSCRIPT_TWO_SUBSCRIPT_TWO = 0;
+    private static final int SUPERSCRIPT_TWO_SUBSCRIPT_THREE = 1;
+    private static final int SUPERSCRIPT_ONE_SUBSCRIPT_ONE = 2;
+    private static final int SUPERSCRIPT_TWO_SUBSCRIPT_ONE = 3;
 
     @BindView(R.id.activity_title) TextView activityTitle;
     @BindView(R.id.text_psi_region) TextView textPSIRegion;
     @BindView(R.id.text_psi_status) TextView textPSIStatus;
     @BindView(R.id.button_toggle) TextView buttonToggle;
     @BindView(R.id.icon_status) TextView iconStatus;
-    @BindView(R.id.icon_info) TextView iconInfo;
+    @BindView(R.id.icon_info) RelativeLayout iconInfo;
 
     @BindView(R.id.layout_no2) LinearLayout layoutNo2;
     @BindView(R.id.divider_no2) View dividerNo2;
@@ -174,19 +176,25 @@ public class RegionPSIActivity extends PsyActionBarActivity implements View.OnCl
         SpannableStringBuilder cs = new SpannableStringBuilder(chemical);
 
         switch (subscriptType) {
-            case SUBSCRIPT_TYPE_A : {
+            case SUPERSCRIPT_TWO_SUBSCRIPT_TWO : {
                 cs.setSpan(new SubscriptSpan(), 2, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 cs.setSpan(new RelativeSizeSpan(0.75f), 2, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             }
 
-            case SUBSCRIPT_TYPE_B : {
+            case SUPERSCRIPT_TWO_SUBSCRIPT_THREE : {
+                cs.setSpan(new SubscriptSpan(), 2, 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                cs.setSpan(new RelativeSizeSpan(0.75f), 2, 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                break;
+            }
+
+            case SUPERSCRIPT_ONE_SUBSCRIPT_ONE : {
                 cs.setSpan(new SubscriptSpan(), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 cs.setSpan(new RelativeSizeSpan(0.75f), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             }
 
-            case SUBSCRIPT_TYPE_C : {
+            case SUPERSCRIPT_TWO_SUBSCRIPT_ONE : {
                 cs.setSpan(new SubscriptSpan(), 2, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 cs.setSpan(new RelativeSizeSpan(0.75f), 2, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
@@ -201,19 +209,19 @@ public class RegionPSIActivity extends PsyActionBarActivity implements View.OnCl
     }
 
     private void setPSIValuesSubIndex(PSIRegionReadings regionReadings) {
-        labelPm10.setText(superSubScript(getString(R.string.pm10_sub_index), SUBSCRIPT_TYPE_A));
+        labelPm10.setText(superSubScript(getString(R.string.pm10_sub_index), SUPERSCRIPT_TWO_SUBSCRIPT_TWO));
         setCurrentPsiLevel(textPm10Before, textPm10After, Float.parseFloat(regionReadings.getPm10SubIndex()));
 
-        labelPm25.setText(superSubScript(getString(R.string.pm25_sub_index), SUBSCRIPT_TYPE_A));
+        labelPm25.setText(superSubScript(getString(R.string.pm25_sub_index), SUPERSCRIPT_TWO_SUBSCRIPT_THREE));
         setCurrentPsiLevel(textPm25Before, textPm25After, Float.parseFloat(regionReadings.getPm25SubIndex()));
 
-        labelO3.setText(superSubScript(getString(R.string.o3_sub_index), SUBSCRIPT_TYPE_B));
+        labelO3.setText(superSubScript(getString(R.string.o3_sub_index), SUPERSCRIPT_ONE_SUBSCRIPT_ONE));
         setCurrentPsiLevel(textO3Before, textO3After, Float.parseFloat(regionReadings.getO3SubIndex()));
 
         labelCo.setText(getString(R.string.co_sub_index));
         setCurrentPsiLevel(textCoBefore, textCoAfter, Float.parseFloat(regionReadings.getCoSubIndex()));
 
-        labelSo2.setText(superSubScript(getString(R.string.so2_sub_index), SUBSCRIPT_TYPE_C));
+        labelSo2.setText(superSubScript(getString(R.string.so2_sub_index), SUPERSCRIPT_TWO_SUBSCRIPT_ONE));
         setCurrentPsiLevel(textSo2Before, textSo2After, Float.parseFloat(regionReadings.getSo2SubIndex()));
 
         layoutNo2.setVisibility(View.GONE);
@@ -221,24 +229,24 @@ public class RegionPSIActivity extends PsyActionBarActivity implements View.OnCl
     }
 
     private void setPSIValuesHours(PSIRegionReadings regionReadings) {
-        labelPm10.setText(superSubScript(getString(R.string.pm10_twenty_four_hourly), SUBSCRIPT_TYPE_A));
+        labelPm10.setText(superSubScript(getString(R.string.pm10_twenty_four_hourly), SUPERSCRIPT_TWO_SUBSCRIPT_TWO));
         setCurrentPsiLevel(textPm10Before, textPm10After, Float.parseFloat(regionReadings.getPm10TwentyFourHourly()));
 
-        labelPm25.setText(superSubScript(getString(R.string.pm25_twenty_four_hourly), SUBSCRIPT_TYPE_A));
+        labelPm25.setText(superSubScript(getString(R.string.pm25_twenty_four_hourly), SUPERSCRIPT_TWO_SUBSCRIPT_THREE));
         setCurrentPsiLevel(textPm25Before, textPm25After, Float.parseFloat(regionReadings.getPm25TwentyFourHourly()));
 
-        labelO3.setText(superSubScript(getString(R.string.o3_eight_hour_max), SUBSCRIPT_TYPE_B));
+        labelO3.setText(superSubScript(getString(R.string.o3_eight_hour_max), SUPERSCRIPT_ONE_SUBSCRIPT_ONE));
         setCurrentPsiLevel(textO3Before, textO3After, Float.parseFloat(regionReadings.getO3EightHourMax()));
 
         labelCo.setText(getString(R.string.co_eight_hour_max));
         setCurrentPsiLevel(textCoBefore, textCoAfter, Float.parseFloat(regionReadings.getCoEightHourMax()));
 
-        labelSo2.setText(superSubScript(getString(R.string.so2_twenty_four_hourly), SUBSCRIPT_TYPE_C));
+        labelSo2.setText(superSubScript(getString(R.string.so2_twenty_four_hourly), SUPERSCRIPT_TWO_SUBSCRIPT_ONE));
         setCurrentPsiLevel(textSo2Before, textSo2After, Float.parseFloat(regionReadings.getSo2TwentyFourHourly()));
 
         layoutNo2.setVisibility(View.VISIBLE);
         dividerNo2.setVisibility(View.VISIBLE);
-        labelNo2.setText(superSubScript(getString(R.string.no2_one_hour_max), SUBSCRIPT_TYPE_C));
+        labelNo2.setText(superSubScript(getString(R.string.no2_one_hour_max), SUPERSCRIPT_TWO_SUBSCRIPT_TWO));
         setCurrentPsiLevel(textNo2Before, textNo2After, Float.parseFloat(regionReadings.getNo2OneHourMax()));
     }
 
