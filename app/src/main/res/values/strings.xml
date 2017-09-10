@@ -51,7 +51,7 @@
     <string name="status_hazardous_range">&gt;300</string>
 
     <string name="status_healthy_message">No bad effect on health.</string>
-    <string name="status_moderate_message">Health condition may be affected by few or none of general population.</string>
+    <string name="status_moderate_message">Health condition may affect few general population.</string>
     <string name="status_unhealthy_message">Everyone may begin to experience health effects.</string>
     <string name="status_very_unhealthy_message">Health warnings of emergency conditions. </string>
     <string name="status_hazardous_message">Everyone may experience more serious health effects.</string>
